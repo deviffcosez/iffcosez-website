@@ -23,7 +23,11 @@ export interface HeaderNavItem {
 // are reached from their parent page's listing instead.
 export const HEADER_MAX_DEPTH = 2;
 
-export function headerNavFromTree(tree: NavNode[], locale: Locale): HeaderNavItem[] {
+export function headerNavFromTree(
+  tree: NavNode[],
+  locale: Locale,
+  labels: Dictionary['header']['nav'],
+): HeaderNavItem[] {
   const toItem = (node: NavNode, depth: number): HeaderNavItem => {
     const children =
       depth < HEADER_MAX_DEPTH ? node.children.filter((c) => c.show_in_menu).map((c) => toItem(c, depth + 1)) : [];
@@ -37,7 +41,15 @@ export function headerNavFromTree(tree: NavNode[], locale: Locale): HeaderNavIte
       children: children.length > 0 ? children : undefined,
     };
   };
-  return tree.filter((node) => node.show_in_menu).map((node) => toItem(node, 0));
+  const publishedBySlug = new Map(
+    tree.filter((node) => node.show_in_menu).map((node) => [node.slug, toItem(node, 0)]),
+  );
+  const defaults = fallbackHeaderNav(labels, locale);
+
+  return FALLBACK_NAV.map((entry, index) => {
+    const published = publishedBySlug.get(entry.slug);
+    return published ? { ...defaults[index], ...published, key: entry.key } : defaults[index];
+  });
 }
 
 type NavLabelKey = keyof Dictionary['header']['nav'];
@@ -45,34 +57,32 @@ type NavLabelKey = keyof Dictionary['header']['nav'];
 // The menu the site shipped with before the header moved onto
 // website_nav_items. Only used when the nav can't be loaded, so an outage of
 // the nav RPC never leaves the site without a header menu.
-const FALLBACK_NAV: { key: NavLabelKey; href: string; children?: { key: NavLabelKey; href: string }[] }[] = [
-  { key: 'about', href: '/about-us/' },
-  { key: 'leadership', href: '/board-of-directors/' },
+const FALLBACK_NAV: {
+  key: NavLabelKey;
+  href: string;
+  slug: string;
+  children?: { key: NavLabelKey; href: string }[];
+}[] = [
+  { key: 'about', slug: 'about-us', href: '/about-us/' },
+  { key: 'leadership', slug: 'leadership', href: '/board-of-directors/' },
+  { key: 'connectivity', slug: 'connectivity-ecosystem-menu', href: '/strategic/' },
   {
     key: 'zones',
+    slug: 'zones',
     href: '/zone/sez/',
     children: [
       { key: 'sez', href: '/zone/sez/' },
       { key: 'dtz', href: '/zone/dtz/' },
     ],
   },
-  {
-    key: 'reportsPolicies',
-    href: '/reports-policies/',
-    children: [
-      { key: 'annualReports', href: '/reports-policies/annual-reports/' },
-      { key: 'csr', href: '/reports-policies/csr/' },
-      { key: 'policies', href: '/reports-policies/policies/' },
-      { key: 'compliances', href: '/reports-policies/compliances/' },
-    ],
-  },
-  { key: 'newsMedia', href: '/news-and-events/' },
-  { key: 'blogs', href: '/blog/' },
-  { key: 'contact', href: '/contact-us/' },
+  { key: 'infrastructure', slug: 'infrastructure-menu', href: '/industrial/' },
+  { key: 'customers', slug: 'customers-menu', href: '/existing-units/' },
+  { key: 'ecosystems', slug: 'ecosystems-menu', href: '/agropark/' },
+  { key: 'contact', slug: 'contact-us', href: '/contact-us/' },
 ];
 
 export function fallbackHeaderNav(labels: Dictionary['header']['nav'], locale: Locale): HeaderNavItem[] {
-  const toItem = (entry: { key: NavLabelKey; href: string }): HeaderNavItem => ({
+  const toItem = (entry: Pick<(typeof FALLBACK_NAV)[number], 'key' | 'href'>): HeaderNavItem => ({
     key: entry.key,
     label: labels[entry.key],
     href: localizePath(entry.href, locale),

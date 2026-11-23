@@ -1,32 +1,56 @@
 import type { Metadata } from "next";
-import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/CtaBand";
 import FeatureCard from "@/components/FeatureCard";
 
 export const metadata: Metadata = {
   title: "About us | IFFCO Kisan SEZ",
   description:
-    "IFFCO Kisan SEZ Limited (IKSEZ) is a wholly owned subsidiary and a unique initiative of IFFCO, being developed in an area of 2776.23 Acres at SPSR Nellore, Andhra Pradesh.",
+    "Learn about IFFCO Kisan SEZ Limited, its vision, mission and plans for a world-class industrial ecosystem in SPSR Nellore, Andhra Pradesh.",
 };
 
 export default function AboutUs() {
   return (
     <>
-      <PageHero
-        title="About us"
-        subtitle="A wholly owned subsidiary and a unique initiative of IFFCO, a globally acclaimed cooperative institution."
-        banner="/images/about-us-banner.webp"
-      />
-
       {/* ================= ABOUT + STATS ================= */}
-      <section className="home-about">
+      <section className="home-about about-page-about">
         <div className="container">
           <div className="home-about__grid">
             <div className="home-about__copy">
-              <div className="home-reference__kicker">Who we are</div>
+              <div className="home-reference__kicker">About Us</div>
               <h2>IFFCO Kisan SEZ Limited</h2>
-              <p>IFFCO Kisan SEZ Limited (IKSEZ) is a wholly owned subsidiary and a unique initiative of IFFCO, a globally acclaimed cooperative institution, with the objective of promoting industrial growth, generating employment and contributing to the overall development of the region and the country.</p>
-              <p>Towards this, IKSEZ is being developed over 2,776.23 acres at SPSR Nellore, Andhra Pradesh. As the developer of the industrial park, IKSEZ provides best-in-class infrastructure and services so investors can focus on their business goals.</p>
+              <p>
+                IFFCO Kisan SEZ Limited (IKSEZ) is a wholly owned subsidiary of the Indian Farmers
+                Fertiliser Cooperative Limited (IFFCO), one of the world’s leading cooperative
+                institutions. Established to develop a world-class industrial ecosystem, IKSEZ aims
+                to accelerate industrialisation, attract domestic and international investment,
+                generate employment and drive sustainable socio-economic development.
+              </p>
+              <p>
+                Strategically located in SPSR Nellore District, Andhra Pradesh, IKSEZ is being
+                developed as a multi-product industrial park across approximately 2,776.23 acres.
+                It offers development-ready industrial land, modern infrastructure and an
+                investor-friendly ecosystem designed to meet the evolving needs of businesses
+                across diverse sectors.
+              </p>
+              <p>
+                With multimodal connectivity by road, rail, air and sea, IKSEZ offers access to key
+                industrial centres, commercial markets and international trade routes. Its location
+                and infrastructure create opportunities in general manufacturing, agro-based
+                industries, food processing, engineering, renewable energy, logistics and other
+                emerging sectors.
+              </p>
+              <p>
+                Leveraging IFFCO’s institutional strength, credibility and cooperative legacy,
+                IKSEZ is committed to facilitating ease of doing business through investor support,
+                transparent governance and sustainable industrial development. It seeks to foster
+                technology transfer, ancillary industries, skill development and local employment.
+              </p>
+              <p>
+                IKSEZ aspires to become a preferred industrial investment destination in Andhra
+                Pradesh and South India, creating lasting value for investors, industries, farmers
+                and local communities while contributing to India’s vision of sustainable and
+                inclusive economic growth.
+              </p>
             </div>
             <div className="home-stats">
               <div><span className="home-stat__icon">▧</span><strong>2,776.23</strong><small>Acres under<br />development</small></div>
@@ -52,13 +76,20 @@ export default function AboutUs() {
               title="Vision"
               icon={<svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>}
             >
-              To set up industrial infrastructure to foster industry, economic growth, sustainable economic development and create employment opportunities.
+              To develop a world-class industrial ecosystem that accelerates industrialisation,
+              sustainable economic growth and employment generation, while contributing directly
+              to the prosperity of farmers and local communities.
             </FeatureCard>
             <FeatureCard
               title="Mission"
               icon={<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" /></svg>}
             >
-              To develop state of the art Industrial Park through a unique &ldquo;Farmer Owned &ndash; Farmer Managed &ndash; Farmer Focused&rdquo; industrial park with world class infrastructure for setting up multiproduct units and attract domestic and global manufacturing entrepreneurs with a focus on agro-based industries.
+              <span className="about-mission-item"><strong>World-class infrastructure:</strong> Develop an integrated industrial park supported by modern utilities and reliable infrastructure.</span>
+              <span className="about-mission-item"><strong>Global and domestic investment:</strong> Attract leading investors across diverse industrial sectors.</span>
+              <span className="about-mission-item"><strong>Sectoral focus:</strong> Promote agro-based industries, food processing, logistics and diversified manufacturing.</span>
+              <span className="about-mission-item"><strong>Socio-economic impact:</strong> Generate sustainable employment and catalyse regional economic growth.</span>
+              <span className="about-mission-item"><strong>Ease of doing business:</strong> Provide a transparent, investor-friendly environment with streamlined approvals and professional facility management.</span>
+              <span className="about-mission-item"><strong>Cooperative ethos:</strong> Uphold IFFCO’s cooperative values through an inclusive, farmer-centric approach to industrial development.</span>
             </FeatureCard>
           </div>
         </div>

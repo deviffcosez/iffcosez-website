@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 const THEME_SCRIPT = `
 (function () {
   try {
@@ -9,8 +11,14 @@ const THEME_SCRIPT = `
 })();
 `;
 
-// Runs before paint (blocking, in <head>) so the stored/system theme applies
-// immediately — no flash of the wrong theme on load.
+// Next.js places beforeInteractive scripts in the document head and runs them
+// before hydration, avoiding a client-rendered raw script element.
 export default function ThemeScript() {
-  return <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />;
+  return (
+    // App Router supports beforeInteractive in the root layout; the Pages Router-specific lint rule does not account for that.
+    // eslint-disable-next-line @next/next/no-before-interactive-script-outside-document
+    <Script id="theme-script" strategy="beforeInteractive">
+      {THEME_SCRIPT}
+    </Script>
+  );
 }

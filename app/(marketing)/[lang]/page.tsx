@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { Building2 } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
-import FeatureCard from "@/components/FeatureCard";
 import { chairman, directors, managingDirector } from "@/lib/leadership";
 import { getPublishedNewsEventList, newsEventSlug, sortNewsEventsByLatest } from "@/lib/publicNewsEvents";
 import { getPublicMediaList } from "@/lib/publicMedia";
@@ -28,8 +28,6 @@ function formatNewsDate(isoDate: string | null): string {
 export default async function Home() {
   const [{ data: newsItems, is_success: newsLoaded }, { data: customerLogos }] = await Promise.all([
     getPublishedNewsEventList({ apiKey: FIRST_PARTY_API_KEY, pageSize: 3 }),
-    // Public media marked "Company logo" in admin > Media. The section is
-    // omitted entirely when there are none (or the call fails).
     getPublicMediaList({ apiKey: FIRST_PARTY_API_KEY, tag: COMPANY_LOGO_TAG, pageSize: 100 }),
   ]);
 
@@ -103,7 +101,13 @@ export default async function Home() {
           <div className="home-about__grid">
             <div className="home-about__copy">
               <h2>About IFFCO Kisan SEZ</h2>
-              <p>IFFCO Kisan SEZ is a premier integrated agro-industrial park designed to foster value addition, employment and sustainable growth in the agriculture sector. With world-class infrastructure.</p>
+              <p>
+                IFFCO Kisan SEZ Limited (IKSEZ) is a wholly owned subsidiary of the Indian Farmers
+                Fertiliser Cooperative Limited (IFFCO), one of the world’s leading cooperative
+                institutions. Established to develop a world-class industrial ecosystem, IKSEZ aims
+                to accelerate industrialisation, attract domestic and international investment,
+                generate employment and drive sustainable socio-economic development.
+              </p>
               <Link className="btn btn--green" href="/about-us/">Read More →</Link>
             </div>
             <div className="home-stats">
@@ -159,20 +163,29 @@ export default async function Home() {
             <ul className="home-customers__grid">
               {customerLogos.map((logo) => {
                 const name = logo.alt_text ?? logo.file_name.replace(/\.[^.]+$/, "");
-                // crossOrigin: logos (often SVG) load straight from Supabase
-                // Storage, which sends no CORP header — same COEP fix as
-                // MediaLibrary.tsx. Tiles stay white in dark mode since most
-                // logos assume a light background.
+                const isGenericLogo = logo.tags?.includes("generic-logo") ?? false;
+                // crossOrigin is required because the public Supabase Storage
+                // bucket does not send a CORP header for these images.
                 // eslint-disable-next-line @next/next/no-img-element
-                const img = <img src={logo.url} alt={name} title={name} loading="lazy" crossOrigin="anonymous" />;
+                const image = <img src={logo.url} alt={name} title={name} loading="lazy" crossOrigin="anonymous" />;
+                const content = isGenericLogo ? (
+                  <span className="home-customers__generic">
+                    <Building2 aria-hidden="true" />
+                    <strong>{name}</strong>
+                  </span>
+                ) : image;
+
                 return (
-                  <li className="home-customers__item" key={logo.id}>
+                  <li
+                    className={`home-customers__item${isGenericLogo ? " home-customers__item--generic" : ""}`}
+                    key={logo.id}
+                  >
                     {logo.link_url ? (
                       <a href={logo.link_url} target="_blank" rel="noopener noreferrer" aria-label={`${name} (opens in a new tab)`}>
-                        {img}
+                        {content}
                       </a>
                     ) : (
-                      img
+                      content
                     )}
                   </li>
                 );
@@ -184,21 +197,88 @@ export default async function Home() {
 
       <section className="home-reference-section home-reference-section--alt home-features">
         <div className="container">
-          <div className="home-section-head">
-            <div>
-              <div className="home-reference__kicker">Major Features</div>
-              <h2>Why investors choose IKSEZ</h2>
-            </div>
+          <div className="home-investment__intro">
+            <div className="home-reference__kicker">Investment Advantages</div>
+            <h2>Why Choose IFFCO KISAN SEZ</h2>
+            <h3>A Strategic Industrial Destination Backed by IFFCO&apos;s Cooperative Legacy</h3>
+            <p>
+              IFFCO KISAN SEZ LIMITED (IKSEZ) offers an integrated industrial development
+              opportunity supported by the institutional strength of IFFCO, strategic geographical
+              location and planned industrial infrastructure. Located in SPSR Nellore District,
+              Andhra Pradesh, the project aims to provide an enabling environment for manufacturing,
+              agro-based industries, food processing, logistics and other industrial sectors.
+            </p>
+            <p>
+              With its large land bank, connectivity to major transportation networks and focus on
+              investor-friendly infrastructure, IKSEZ aims to become a preferred destination for
+              domestic and international investors.
+            </p>
           </div>
-          <div className="home-feature-grid">
-            <FeatureCard title="Multiproduct SEZ" icon={<span>▥</span>}>A Multiproduct Special Economic Zone (SEZ) spanning approximately 1,900 acres.</FeatureCard>
-            <FeatureCard title="Domestic Tariff Area" icon={<span>⌂</span>}>A Domestic Tariff Area (DTA) covering about 877 acres which is designated for initiatives focused on domestic Indian market.</FeatureCard>
-            <FeatureCard title="Multimodal Connectivity" icon={<span>⌁</span>}>The location is well connected by Road, Rail, Air and Sea.</FeatureCard>
-            <FeatureCard title="NH 16 Frontage" icon={<span>⌖</span>}>The site is on NH 16 with 8 km frontage and adjacent to a trunk rail link.</FeatureCard>
-            <FeatureCard title="Industrial Corridor" icon={<span>◇</span>}>The site falls in the Visakhapatnam-Chennai industrial corridor being actively developed by the state government.</FeatureCard>
-            <FeatureCard title="Ready Infrastructure" icon={<span>ϟ</span>}>The site is equipped with the major infrastructural facilities with ready availability of water, power, office space and security.</FeatureCard>
-            <FeatureCard title="Skilled Manpower" icon={<span>♧</span>}>Ready availability of skilled manpower.</FeatureCard>
-            <FeatureCard title="Explore the full list of benefits" className="card--dark" actions={<Link className="btn btn--green btn--sm" href="/benefits/">See All Benefits</Link>}>Tax concessions under the SEZ Act plus strategic advantages across power, water, connectivity and manpower.</FeatureCard>
+          <div className="home-investment-grid">
+            {[
+              {
+                title: "Strong Institutional Support",
+                text: "A 100% wholly owned subsidiary of IFFCO, providing institutional credibility and a strong cooperative foundation.",
+                image: "reason-1.webp",
+              },
+              {
+                title: "Large Industrial Land Bank",
+                text: "A large planned industrial land bank, providing opportunities for large-scale and diversified industrial investments.",
+                image: "reason-2.webp",
+              },
+              {
+                title: "Strategic Location",
+                text: "Located in Nellore District with connectivity to NH-16 and the Chennai–Kolkata transportation corridor.",
+                image: "reason-3.webp",
+              },
+              {
+                title: "Industrial Infrastructure",
+                text: "Planned facilities include internal roads, power, water supply, street lighting, security and other common infrastructure.",
+                image: "reason-4.webp",
+              },
+              {
+                title: "Logistics and Connectivity",
+                text: "Access to road, rail, port and air transportation networks, supporting domestic distribution and international trade.",
+                image: "reason-5.webp",
+              },
+              {
+                title: "Diverse Industrial Opportunities",
+                text: "Suitable for agro-processing, food processing, manufacturing, engineering, logistics and allied industries.",
+                image: "reason-6.webp",
+              },
+              {
+                title: "Sustainable Industrial Development",
+                text: "Encouraging resource-efficient industrial operations, responsible environmental practices and sustainable regional growth.",
+                image: "reason-7.webp",
+              },
+              {
+                title: "Employment and Regional Development",
+                text: "Promoting employment generation, industrial investment, local entrepreneurship and economic development.",
+                image: "reason-8.webp",
+              },
+            ].map((item, index) => (
+              <article className="home-investment-card" key={item.title}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={`/images/investment-advantages/${item.image}`}
+                  alt=""
+                  loading="lazy"
+                />
+                <div className="home-investment-card__body">
+                  <span className="home-investment-card__number">{String(index + 1).padStart(2, "0")}</span>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="home-investment__actions">
+            <Link className="btn btn--green" href="/benefits/">
+              Explore IKSEZ Benefits
+            </Link>
+            <Link className="link-arrow" href="/invitation-for-investors/">
+              Explore business opportunities
+            </Link>
           </div>
         </div>
       </section>

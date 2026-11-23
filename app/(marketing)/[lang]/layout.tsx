@@ -87,7 +87,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   // nothing published yet, the site keeps its original built-in menu.
   const headerNav =
     publishedNav && publishedNav.tree.length > 0
-      ? headerNavFromTree(publishedNav.tree, lang)
+      ? headerNavFromTree(publishedNav.tree, lang, dict.header.nav)
       : fallbackHeaderNav(dict.header.nav, lang);
 
   return (

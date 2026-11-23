@@ -1,86 +1,87 @@
-import Link from "next/link";
-import { chairman, directors, managingDirector } from "@/lib/leadership";
-import { localizePath, type Locale } from "@/lib/i18n/config";
+import { leadershipPageProfiles } from "@/lib/leadership";
 
-const IFFCO_LEADERSHIP_URL = "https://www.iffco.in/en/leadership";
-
-export function LeadershipBanners({ lang }: { lang: Locale }) {
-  return (
-    <div className="leadership-banners">
-      {[chairman, managingDirector].map((profile) => {
-        const isChairman = profile.role === "Chairman";
-        const [lead, ...rest] = profile.bio.split(profile.name);
-        return (
-          <article
-            className={`leadership-banner leadership-banner--${isChairman ? "chairman" : "managing-director"}`}
-            key={profile.name}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="leadership-banner__image" src={profile.image} alt={profile.name} />
-            <div className="leadership-banner__content">
-              <h2>
-                {profile.name} <span>({profile.role})</span>
-              </h2>
-              <div className="leadership-banner__bio">
-                <p>
-                  {/* The chairman's bio opens with his name in bold, as on IFFCO's page. */}
-                  {isChairman && rest.length ? (
-                    <>
-                      {lead}
-                      <strong>{profile.name}</strong>
-                      {rest.join(profile.name)}
-                    </>
-                  ) : (
-                    profile.bio
-                  )}
-                </p>
-                {profile.profilePath ? (
-                  <Link className="leadership-banner__more" href={localizePath(profile.profilePath, lang)}>
-                    Read More
-                  </Link>
-                ) : (
-                  <a className="leadership-banner__more" href={IFFCO_LEADERSHIP_URL} target="_blank" rel="noopener noreferrer">
-                    Read More
-                  </a>
-                )}
-                {profile.twitter && (
-                  <a className="leadership-banner__follow" href={profile.twitter} target="_blank" rel="noopener noreferrer">
-                    <span>Follow on</span>
-                    <svg viewBox="0 0 24 24" aria-label="X" role="img">
-                      <path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L2.9 2h6.4l4.4 5.9L18.9 2Zm-1.1 18.1h1.7L7.3 3.8H5.5l12.3 16.3Z" />
-                    </svg>
-                  </a>
-                )}
-              </div>
-            </div>
-          </article>
-        );
-      })}
-    </div>
-  );
+function initials(name: string) {
+  return name
+    .replace(/^(Mr\.|Mrs\.|Ms\.|Smt\.|Dr\.)\s*/i, "")
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("");
 }
 
 export default function LeadershipProfiles() {
   return (
-    <div className="leadership-directors">
-      <div className="section-head">
-        <span className="eyebrow">Board of Directors</span>
-        <h2>Leadership from the cooperative movement</h2>
-      </div>
-      <div className="grid leadership-directors__grid">
-        {directors.map((director) => (
-          <article className="leadership-director" key={director.name}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={director.image} alt={director.name} loading="lazy" />
-            <div>
-              <h3>{director.name}</h3>
-              <strong>{director.role}</strong>
-              {director.organization && <p>{director.organization}</p>}
-              <p>{director.bio}</p>
-            </div>
-          </article>
-        ))}
-      </div>
-    </div>
+    <>
+      <section className="leadership-board" aria-labelledby="leadership-board-title">
+        <div className="container">
+          <h2 id="leadership-board-title">Board of Directors</h2>
+          <div className="leadership-board__list">
+            {leadershipPageProfiles.map((profile, index) => (
+              (() => {
+                const hasMoreContent = (profile.bio?.length ?? 0) > 280 || Boolean(profile.sections?.length);
+                const sections = profile.sections?.map((section) => (
+                  <section className="leadership-profile__section" key={section.title}>
+                    <h4>{section.title}</h4>
+                    {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                    {section.items && (
+                      <ul>
+                        {section.items.map((item) => <li key={item}>{item}</li>)}
+                      </ul>
+                    )}
+                  </section>
+                ));
+
+                return (
+                  <article
+                    className={`leadership-profile${index % 2 ? " leadership-profile--reverse" : ""}`}
+                    key={profile.name}
+                  >
+                    <div className="leadership-profile__portrait">
+                      {profile.image ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={profile.image}
+                          alt={profile.name}
+                          loading="lazy"
+                          style={profile.imagePosition ? { objectPosition: profile.imagePosition } : undefined}
+                        />
+                      ) : (
+                        <span aria-hidden="true">{initials(profile.name)}</span>
+                      )}
+                    </div>
+                    <div className="leadership-profile__content">
+                      {hasMoreContent ? (
+                        <details className="leadership-profile__details">
+                          <summary>
+                            <span className="leadership-profile__heading">
+                              <span className="leadership-profile__name">{profile.name}</span>
+                              <span className="leadership-profile__role">{profile.role}</span>
+                            </span>
+                            {profile.bio && <span className="leadership-profile__preview">{profile.bio}</span>}
+                            <span className="leadership-profile__toggle" aria-hidden="true" />
+                          </summary>
+                          {profile.sections?.length ? (
+                            <div className="leadership-profile__expanded">{sections}</div>
+                          ) : (
+                            <span className="leadership-profile__expanded" aria-hidden="true" />
+                          )}
+                        </details>
+                      ) : (
+                        <>
+                          <h3>{profile.name}</h3>
+                          <p className="leadership-profile__role">{profile.role}</p>
+                          {profile.bio && <p className="leadership-profile__bio">{profile.bio}</p>}
+                          {sections}
+                        </>
+                      )}
+                    </div>
+                  </article>
+                );
+              })()
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 }

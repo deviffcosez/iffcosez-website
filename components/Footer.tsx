@@ -81,7 +81,13 @@ export default function Footer({ lang, common, labels }: FooterProps) {
                 <Link href={href("/news-and-events/")}>{labels.links.newsEvents}</Link>
               </li>
               <li>
-                <Link href={href("/gallery/")}>{labels.links.gallery}</Link>
+                <Link href={href("/gallery/")}>{labels.links.media}</Link>
+              </li>
+              <li>
+                <Link href={href("/gallery/")}>{labels.links.clientVisits}</Link>
+              </li>
+              <li>
+                <Link href={href("/invitation-for-investors/")}>{labels.links.investorsUseful}</Link>
               </li>
               <li>
                 <Link href={href("/blog/")}>{labels.links.blog}</Link>

@@ -1,65 +1,82 @@
 import type { Metadata } from "next";
+import { Building2, Factory } from "lucide-react";
 import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
-  title: "Existing units | IFFCO Kisan SEZ",
+  title: "Customers | IFFCO Kisan SEZ",
   description:
-    "Units operating at IFFCO Kisan SEZ including Siemens Gamesa Renewable Energy Pvt Ltd, ADJ and APTRANSCO, with HCCB coming up.",
+    "Meet the companies operating at IKSEZ and those under construction, upcoming or grounded, and learn about emerging investment opportunities.",
 };
+
+const EXISTING_UNITS = [
+  "M/s. A D J & Brothers",
+  "M/s. Vayona Energy Private Limited",
+];
+
+const UPCOMING_UNITS = [
+  "M/s. Hindustan Coca-Cola Beverages Pvt Ltd",
+  "M/s. Gayathri Renewable Fuels and Allied Industries Private Limited",
+  "M/s. Ramshy Bio Private Limited",
+  "M/s. PMK Distillations",
+  "M/s. Marine Bio-Polymers LLP",
+  "M/s. R V Associates",
+];
+
+const OPPORTUNITY_PARAGRAPHS = [
+  "IFFCO KISAN SEZ Limited is actively engaging with leading Indian and multinational corporations to attract strategic industrial investments and establish a diverse manufacturing ecosystem within the Industrial Park.",
+  "The organisation is currently engaged in advanced discussions with several reputed national and international companies across potential industrial sectors for setting up their manufacturing and processing facilities at IKSEZ. These engagements reflect the growing interest in the Industrial Park and its emerging potential as a preferred destination for industrial investment, manufacturing and export-oriented activities.",
+  "The proposed investments are expected to create significant opportunities for employment generation, technology transfer, skill development, ancillary and supporting industries, and the overall strengthening of the regional industrial ecosystem, subject to the successful conclusion of discussions and receipt of requisite statutory and regulatory approvals.",
+  "With its strategic location, planned infrastructure, connectivity and institutional support, IKSEZ is committed to creating a conducive business environment for domestic and international investors.",
+  "IFFCO KISAN SEZ Limited continues to adopt a proactive, investor-centric approach by facilitating investment proposals through coordinated engagement, infrastructure development, institutional coordination and end-to-end support, with the objective of accelerating industrial establishment and fostering long-term business growth.",
+];
+
+function UnitList({ units }: { units: string[] }) {
+  return (
+    <ol className="customer-unit-list">
+      {units.map((unit, index) => (
+        <li className="customer-unit" key={unit}>
+          <span className="customer-unit__number">{String(index + 1).padStart(2, "0")}</span>
+          <Building2 aria-hidden="true" />
+          <span>{unit}</span>
+        </li>
+      ))}
+    </ol>
+  );
+}
 
 export default function ExistingUnits() {
   return (
     <>
       <PageHero
-        title="Existing units"
-        subtitle="Many other companies of National repute are also expected to set up their units very soon."
+        title="Customers"
+        subtitle="Attracting Global Ambitions. Creating Industrial Opportunities."
         banner="/images/infrastructur-banner.webp"
       />
 
       <section className="section">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">Operating at IKSEZ</span>
-            <h2>Companies on site</h2>
-          </div>
+          <div className="grid grid--2 customer-unit-groups">
+            <article className="card customer-unit-group">
+              <div className="customer-unit-group__heading">
+                <span className="card__icon" aria-hidden="true"><Factory /></span>
+                <div>
+                  <span className="eyebrow">Operating at IKSEZ</span>
+                  <h2>Existing Units</h2>
+                </div>
+              </div>
+              <UnitList units={EXISTING_UNITS} />
+            </article>
 
-          <div className="grid grid--4">
-            <article className="card" data-reveal="">
-              <div className="card__icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M12 2v6M12 12l7 4M12 12l-7 4" />
-                  <circle cx="12" cy="10" r="2.2" />
-                </svg>
+            <article className="card customer-unit-group">
+              <div className="customer-unit-group__heading">
+                <span className="card__icon" aria-hidden="true"><Building2 /></span>
+                <div>
+                  <span className="eyebrow">Growing at IKSEZ</span>
+                  <h2>Units Under Construction / Upcoming / Grounded</h2>
+                </div>
               </div>
-              <h3 className="existing-unit-card__title">Siemens Gamesa Renewable Energy Pvt Ltd</h3>
-            </article>
-            <article className="card" data-reveal="">
-              <div className="card__icon">
-                <svg viewBox="0 0 24 24">
-                  <rect x="3" y="8" width="18" height="12" rx="2" />
-                  <path d="M8 8V6a4 4 0 0 1 8 0v2" />
-                </svg>
-              </div>
-              <h3 className="existing-unit-card__title">ADJ</h3>
-            </article>
-            <article className="card" data-reveal="">
-              <div className="card__icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" />
-                </svg>
-              </div>
-              <h3 className="existing-unit-card__title">APTRANSCO</h3>
-            </article>
-            <article className="card" data-reveal="">
-              <div className="card__icon">
-                <svg viewBox="0 0 24 24">
-                  <path d="M8 2h8l-1 4H9L8 2zM7 6h10l1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L7 6z" />
-                </svg>
-              </div>
-              <h3 className="existing-unit-card__title">
-                HCCB <span className="muted" style={{ fontWeight: 500 }}>(coming up)</span>
-              </h3>
+              <UnitList units={UPCOMING_UNITS} />
             </article>
           </div>
         </div>
@@ -67,49 +84,12 @@ export default function ExistingUnits() {
 
       <section className="section section--alt">
         <div className="container">
-          <div className="section-head">
-            <span className="eyebrow">On site</span>
-            <h2>From the units</h2>
+          <div className="section-head customer-opportunities__heading">
+            <span className="eyebrow">Investment pipeline</span>
+            <h2>Emerging Investment Opportunities at IKSEZ</h2>
           </div>
-
-          <div className="grid grid--2">
-            <article className="media-card" data-reveal="">
-              <a
-                className="media-card__figure"
-                href="/images/existing-1.webp"
-                data-lightbox=""
-                data-caption="Wind mill blade of Siemen’s Gamesa being transported"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/existing-1.webp"
-                  alt="Wind mill blade of Siemen’s Gamesa being transported"
-                  loading="lazy"
-                />
-              </a>
-              <div className="media-card__body">
-                <h3 className="existing-unit-card__title">Wind mill blade of Siemen&rsquo;s Gamesa being transported</h3>
-              </div>
-            </article>
-
-            <article className="media-card" data-reveal="">
-              <a
-                className="media-card__figure"
-                href="/images/existing-2.webp"
-                data-lightbox=""
-                data-caption="An export consignments of ADJ & Brothers"
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/images/existing-2.webp"
-                  alt="An export consignments of ADJ & Brothers"
-                  loading="lazy"
-                />
-              </a>
-              <div className="media-card__body">
-                <h3 className="existing-unit-card__title">An export consignments of ADJ &amp; Brothers</h3>
-              </div>
-            </article>
+          <div className="customer-opportunities__copy">
+            {OPPORTUNITY_PARAGRAPHS.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </div>
       </section>

@@ -26,8 +26,8 @@ const fetchNav = unstable_cache(
     if (!result?.is_success) throw new Error(result?.message ?? 'fn_get_website_nav failed');
     return result.data ?? [];
   },
-  ['website-nav'],
-  { tags: [NAV_CACHE_TAG], revalidate: 3600 }
+  ['website-nav-v2'],
+  { tags: [NAV_CACHE_TAG], revalidate: 300 }
 );
 
 export interface PublishedNav {
