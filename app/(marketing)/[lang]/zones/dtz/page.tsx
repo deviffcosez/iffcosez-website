@@ -145,7 +145,7 @@ export default function DtzPage() {
               <h3>SEZ</h3>
               <div className="home-zone-card__sub">Special Economic Zone</div>
               <p>A dedicated zone for export-oriented units with world-class infrastructure, customs benefits and seamless logistics support.</p>
-              <Link href="/zone/sez/">Explore SEZ →</Link>
+              <Link href="/zones/sez/">Explore SEZ →</Link>
             </div>
           </article>
         </div>

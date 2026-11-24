@@ -88,6 +88,8 @@ export async function saveNavItem(input: NavItemInput): Promise<ActionResult> {
     p_file_name: input.kind === 'document' ? input.file_name : null,
     p_open_in_new_tab: input.kind === 'page' ? false : input.open_in_new_tab,
     p_show_in_menu: input.show_in_menu,
+    p_footer_group: input.footer_group,
+    p_footer_sort: input.footer_sort,
     p_published: input.published,
   });
   if (error) return { error };

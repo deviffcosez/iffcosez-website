@@ -1,6 +1,6 @@
 import type { GalleryTab } from "@/components/LeaderGallery";
 
-// Content for the leadership profile pages under /board-of-directors/.
+// Content for the leadership profile pages under /leadership/.
 // Each mirrors that leader's profile on iffco.in (linked per entry); photos
 // are local copies of IFFCO's, in public/images/leadership/iffco. Rendered by
 // LeaderProfilePage.

@@ -11,7 +11,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import { PageviewTracker } from "@/components/PageviewTracker";
 import { hasLocale, indexedLocales, localeTags, locales } from "@/lib/i18n/config";
 import { getDictionary } from "@/lib/i18n/getDictionary";
-import { fallbackHeaderNav, headerNavFromTree } from "@/lib/headerNav";
+import { fallbackHeaderNav, footerNavFromTree, headerNavFromTree } from "@/lib/headerNav";
 import { getPublishedNav } from "@/lib/publicNav";
 import { SITE_URL } from "@/lib/siteUrl";
 import "../globals.css";
@@ -79,16 +79,21 @@ const montserrat = localFont({
   variable: "--font-montserrat",
 });
 
+// TEMPORARY: render every marketing page per request so menu/page edits show
+// immediately. Without this the coded pages are prerendered with the header
+// and footer baked in. Remove (and restore the nav cache in lib/publicNav.ts)
+// when the site goes live.
+export const dynamic = "force-dynamic";
+
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
   const [dict, publishedNav] = await Promise.all([getDictionary(lang), getPublishedNav(lang)]);
   // Admin-managed menu (website_nav_items). If it can't be loaded, or has
   // nothing published yet, the site keeps its original built-in menu.
-  const headerNav =
-    publishedNav && publishedNav.tree.length > 0
-      ? headerNavFromTree(publishedNav.tree, lang, dict.header.nav)
-      : fallbackHeaderNav(dict.header.nav, lang);
+  const publishedHeaderNav = publishedNav ? headerNavFromTree(publishedNav.tree, lang) : [];
+  const headerNav = publishedHeaderNav.length > 0 ? publishedHeaderNav : fallbackHeaderNav(dict.header.nav, lang);
+  const footerNav = publishedNav ? footerNavFromTree(publishedNav.tree, lang) : null;
 
   return (
     <html
@@ -114,7 +119,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
           switcherLabel={dict.languageSwitcher.ariaLabel}
         />
         <main id="main">{children}</main>
-        <Footer lang={lang} common={dict.common} labels={dict.footer} />
+        <Footer lang={lang} common={dict.common} labels={dict.footer} nav={footerNav} />
         <SiteEffects />
         <WhatsAppButton />
       </body>

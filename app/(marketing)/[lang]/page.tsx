@@ -53,7 +53,7 @@ export default async function Home() {
                 activity.
               </p>
               <div className="hero__actions">
-                <Link className="btn btn--green btn--lg" href="/invitation-for-investors/">
+                <Link className="btn btn--green btn--lg" href="/investors-useful-links/">
                   Business Opportunities
                 </Link>
                 <Link className="btn btn--outline btn--lg" href="/about-us/">
@@ -135,7 +135,7 @@ export default async function Home() {
                 <h3>SEZ</h3>
                 <div className="home-zone-card__sub">Special Economic Zone</div>
                 <p>A dedicated zone for export-oriented units with world-class infrastructure, customs benefits and seamless logistics support.</p>
-                <Link href="/zone/sez/">Explore SEZ →</Link>
+                <Link href="/zones/sez/">Explore SEZ →</Link>
               </div>
             </article>
             <article className="home-zone-card">
@@ -144,7 +144,7 @@ export default async function Home() {
                 <h3>DTZ</h3>
                 <div className="home-zone-card__sub">Domestic Tariff Zone</div>
                 <p>Designed for domestic market industries with flexible operations and a conducive business environment.</p>
-                <Link href="/zone/dtz/">Explore DTZ →</Link>
+                <Link href="/zones/dtz/">Explore DTZ →</Link>
               </div>
             </article>
           </div>
@@ -273,10 +273,10 @@ export default async function Home() {
             ))}
           </div>
           <div className="home-investment__actions">
-            <Link className="btn btn--green" href="/benefits/">
+            <Link className="btn btn--green" href="/connectivity-eco-system/">
               Explore IKSEZ Benefits
             </Link>
-            <Link className="link-arrow" href="/invitation-for-investors/">
+            <Link className="link-arrow" href="/investors-useful-links/">
               Explore business opportunities
             </Link>
           </div>

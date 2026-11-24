@@ -26,7 +26,6 @@ export const HEADER_MAX_DEPTH = 2;
 export function headerNavFromTree(
   tree: NavNode[],
   locale: Locale,
-  labels: Dictionary['header']['nav'],
 ): HeaderNavItem[] {
   const toItem = (node: NavNode, depth: number): HeaderNavItem => {
     const children =
@@ -41,15 +40,50 @@ export function headerNavFromTree(
       children: children.length > 0 ? children : undefined,
     };
   };
-  const publishedBySlug = new Map(
-    tree.filter((node) => node.show_in_menu).map((node) => [node.slug, toItem(node, 0)]),
-  );
-  const defaults = fallbackHeaderNav(labels, locale);
+  // The menu is exactly the published top-level items flagged show_in_menu,
+  // in sort order: adding, renaming or reordering an item in website_nav_items
+  // changes the header with no code change.
+  return tree.filter((node) => node.show_in_menu).map((node) => toItem(node, 0));
+}
 
-  return FALLBACK_NAV.map((entry, index) => {
-    const published = publishedBySlug.get(entry.slug);
-    return published ? { ...defaults[index], ...published, key: entry.key } : defaults[index];
-  });
+export interface FooterNavItem {
+  key: string;
+  label: string;
+  href: string;
+  anchor: boolean;
+  newTab: boolean;
+}
+
+export interface FooterNavColumns {
+  explore: FooterNavItem[];
+  information: FooterNavItem[];
+}
+
+// Footer columns from the published tree (any depth, so the compliances page
+// under Reports & Policies can sit in the footer). Null when nothing is
+// flagged, so the caller keeps its built-in footer links.
+export function footerNavFromTree(tree: NavNode[], locale: Locale): FooterNavColumns | null {
+  const flagged: NavNode[] = [];
+  const walk = (nodes: NavNode[]) => {
+    for (const node of nodes) {
+      if (node.footer_group) flagged.push(node);
+      walk(node.children);
+    }
+  };
+  walk(tree);
+  if (flagged.length === 0) return null;
+  const column = (group: 'explore' | 'information') =>
+    flagged
+      .filter((node) => node.footer_group === group)
+      .sort((a, b) => a.footer_sort - b.footer_sort || a.id - b.id)
+      .map((node) => ({
+        key: String(node.id),
+        label: node.title,
+        href: navItemHref(node, locale),
+        anchor: navItemNeedsAnchor(node),
+        newTab: node.open_in_new_tab,
+      }));
+  return { explore: column('explore'), information: column('information') };
 }
 
 type NavLabelKey = keyof Dictionary['header']['nav'];
@@ -60,25 +94,23 @@ type NavLabelKey = keyof Dictionary['header']['nav'];
 const FALLBACK_NAV: {
   key: NavLabelKey;
   href: string;
-  slug: string;
   children?: { key: NavLabelKey; href: string }[];
 }[] = [
-  { key: 'about', slug: 'about-us', href: '/about-us/' },
-  { key: 'leadership', slug: 'leadership', href: '/board-of-directors/' },
-  { key: 'connectivity', slug: 'connectivity-ecosystem-menu', href: '/strategic/' },
+  { key: 'about', href: '/about-us/' },
+  { key: 'leadership', href: '/leadership/' },
+  { key: 'connectivity', href: '/connectivity-eco-system/' },
   {
     key: 'zones',
-    slug: 'zones',
-    href: '/zone/sez/',
+    href: '/zones/sez/',
     children: [
-      { key: 'sez', href: '/zone/sez/' },
-      { key: 'dtz', href: '/zone/dtz/' },
+      { key: 'sez', href: '/zones/sez/' },
+      { key: 'dtz', href: '/zones/dtz/' },
     ],
   },
-  { key: 'infrastructure', slug: 'infrastructure-menu', href: '/industrial/' },
-  { key: 'customers', slug: 'customers-menu', href: '/existing-units/' },
-  { key: 'ecosystems', slug: 'ecosystems-menu', href: '/agropark/' },
-  { key: 'contact', slug: 'contact-us', href: '/contact-us/' },
+  { key: 'infrastructure', href: '/infrastructure/' },
+  { key: 'customers', href: '/customers/' },
+  { key: 'ecosystems', href: '/eco-systems/' },
+  { key: 'contact', href: '/contact-us/' },
 ];
 
 export function fallbackHeaderNav(labels: Dictionary['header']['nav'], locale: Locale): HeaderNavItem[] {

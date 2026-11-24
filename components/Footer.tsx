@@ -4,15 +4,55 @@ import FooterYear from "./FooterYear";
 import ThemeToggle from "./ThemeToggle";
 import { localizePath, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/getDictionary";
+import type { FooterNavColumns, FooterNavItem } from "@/lib/headerNav";
 
 type FooterProps = {
   lang: Locale;
   common: Dictionary["common"];
   labels: Dictionary["footer"];
+  // Admin-managed footer links (website_nav_items); null = built-in links.
+  nav?: FooterNavColumns | null;
 };
 
-export default function Footer({ lang, common, labels }: FooterProps) {
+export default function Footer({ lang, common, labels, nav }: FooterProps) {
   const href = (path: string) => localizePath(path, lang);
+  const l = labels.links;
+  // Used only when the nav can't be loaded or has no footer items yet.
+  const fallback = (items: [string, string][]): FooterNavItem[] =>
+    items.map(([path, label]) => ({ key: path + label, label, href: href(path), anchor: false, newTab: false }));
+  const explore =
+    nav?.explore ??
+    fallback([
+      ["/about-us/", l.about],
+      ["/eco-systems/", l.agropark],
+      ["/connectivity-eco-system/", l.benefits],
+      ["/investors-useful-links/", l.businessOpportunities],
+      ["/infrastructure/", l.infrastructure],
+    ]);
+  const information =
+    nav?.information ??
+    fallback([
+      ["/master-plan/", l.masterPlan],
+      ["/customers/", l.existingUnits],
+      ["/news-and-events/", l.newsEvents],
+      ["/media/", l.media],
+      ["/media/", l.clientVisits],
+      ["/investors-useful-links/", l.investorsUseful],
+      ["/blog/", l.blog],
+      ["/reports-policies/compliance-documents/", l.compliances],
+    ]);
+  const renderLinks = (items: FooterNavItem[]) =>
+    items.map((item) => (
+      <li key={item.key}>
+        {item.anchor ? (
+          <a href={item.href} {...(item.newTab ? { target: "_blank", rel: "noopener" } : {})}>
+            {item.label}
+          </a>
+        ) : (
+          <Link href={item.href}>{item.label}</Link>
+        )}
+      </li>
+    ));
 
   return (
     <footer className="site-footer">
@@ -49,53 +89,12 @@ export default function Footer({ lang, common, labels }: FooterProps) {
 
           <div>
             <p className="footer__title">{labels.exploreTitle}</p>
-            <ul className="footer__links">
-              <li>
-                <Link href={href("/about-us/")}>{labels.links.about}</Link>
-              </li>
-              <li>
-                <Link href={href("/agropark/")}>{labels.links.agropark}</Link>
-              </li>
-              <li>
-                <Link href={href("/benefits/")}>{labels.links.benefits}</Link>
-              </li>
-              <li>
-                <Link href={href("/invitation-for-investors/")}>{labels.links.businessOpportunities}</Link>
-              </li>
-              <li>
-                <Link href={href("/industrial/")}>{labels.links.infrastructure}</Link>
-              </li>
-            </ul>
+            <ul className="footer__links">{renderLinks(explore)}</ul>
           </div>
 
           <div>
             <p className="footer__title">{labels.informationTitle}</p>
-            <ul className="footer__links">
-              <li>
-                <Link href={href("/master-plan/")}>{labels.links.masterPlan}</Link>
-              </li>
-              <li>
-                <Link href={href("/existing-units/")}>{labels.links.existingUnits}</Link>
-              </li>
-              <li>
-                <Link href={href("/news-and-events/")}>{labels.links.newsEvents}</Link>
-              </li>
-              <li>
-                <Link href={href("/gallery/")}>{labels.links.media}</Link>
-              </li>
-              <li>
-                <Link href={href("/gallery/")}>{labels.links.clientVisits}</Link>
-              </li>
-              <li>
-                <Link href={href("/invitation-for-investors/")}>{labels.links.investorsUseful}</Link>
-              </li>
-              <li>
-                <Link href={href("/blog/")}>{labels.links.blog}</Link>
-              </li>
-              <li>
-                <Link href={href("/reports-policies/compliances/")}>{labels.links.compliances}</Link>
-              </li>
-            </ul>
+            <ul className="footer__links">{renderLinks(information)}</ul>
           </div>
 
           <div>

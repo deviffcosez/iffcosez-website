@@ -15,7 +15,7 @@ export default function CtaBand() {
             <Link className="btn btn--green btn--lg" href="/contact-us/">
               Talk to our team
             </Link>
-            <Link className="btn btn--outline btn--lg" href="/invitation-for-investors/">
+            <Link className="btn btn--outline btn--lg" href="/investors-useful-links/">
               Business Opportunities
             </Link>
           </div>

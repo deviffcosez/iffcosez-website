@@ -1,5 +1,4 @@
 import { cache } from 'react';
-import { unstable_cache } from 'next/cache';
 import { createClient } from '@supabase/supabase-js';
 import type { Locale } from '@/lib/i18n/config';
 import { buildNavTree, type NavNode, type NavRow } from '@/lib/navTree';
@@ -13,7 +12,12 @@ export const NAV_CACHE_TAG = 'website-nav';
 // unstable_cache never caches a failed lookup; saveNavItem and friends
 // (admin/navigation/actions.ts) bust the tag on every change, the TTL is
 // only a safety net.
-const fetchNav = unstable_cache(
+// TEMPORARILY UNCACHED while the navigation is being finished: every request
+// reads fn_get_website_nav fresh (cache() below still shares one lookup within
+// a request). To re-enable, wrap this in unstable_cache(fn, ['website-nav-v3'],
+// { tags: [NAV_CACHE_TAG], revalidate: 300 }) and remove force-dynamic from
+// app/(marketing)/[lang]/layout.tsx.
+const fetchNav =
   async (locale: string | null): Promise<NavRow[]> => {
     const supabase = createClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,10 +29,7 @@ const fetchNav = unstable_cache(
     const result = envelope as { is_success: boolean; message: string; data: NavRow[] };
     if (!result?.is_success) throw new Error(result?.message ?? 'fn_get_website_nav failed');
     return result.data ?? [];
-  },
-  ['website-nav-v2'],
-  { tags: [NAV_CACHE_TAG], revalidate: 300 }
-);
+  };
 
 export interface PublishedNav {
   tree: NavNode[];

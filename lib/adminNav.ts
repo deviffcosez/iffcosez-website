@@ -30,6 +30,8 @@ export interface AdminNavItem {
   file_name: string | null;
   open_in_new_tab: boolean;
   show_in_menu: boolean;
+  footer_group: 'explore' | 'information' | null;
+  footer_sort: number;
   sort_order: number;
   published: boolean;
   created_at: string;
@@ -62,6 +64,9 @@ export interface NavItemInput {
   file_name: string | null;
   open_in_new_tab: boolean;
   show_in_menu: boolean;
+  // Footer column, or null for no footer link.
+  footer_group: 'explore' | 'information' | null;
+  footer_sort: number;
   published: boolean;
   translations: NavTranslationInput[];
 }

@@ -41,7 +41,7 @@ export default function SezPage() {
                 <li>Other incentives offered by state and central governments</li>
               </ul>
               <div className="mt-8">
-                <Link className="btn btn--brand" href="/invitation-for-investors/">Explore business opportunities</Link>
+                <Link className="btn btn--brand" href="/investors-useful-links/">Explore business opportunities</Link>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@ export default function SezPage() {
               <h3>DTZ</h3>
               <div className="home-zone-card__sub">Domestic Tariff Zone</div>
               <p>Designed for domestic market industries with flexible operations and a conducive business environment.</p>
-              <Link href="/zone/dtz/">Explore DTZ →</Link>
+              <Link href="/zones/dtz/">Explore DTZ →</Link>
             </div>
           </article>
         </div>

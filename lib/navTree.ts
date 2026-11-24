@@ -26,6 +26,9 @@ export interface NavRow {
   file_name: string | null;
   open_in_new_tab: boolean;
   show_in_menu: boolean;
+  // Footer column ('explore' | 'information'), or null when not in the footer.
+  footer_group: 'explore' | 'information' | null;
+  footer_sort: number;
   sort_order: number;
   updated_at: string;
   // Only meaningful for non-English requests: the language title/body are
@@ -91,21 +94,19 @@ export function navItemNeedsAnchor(item: Pick<NavRow, 'kind' | 'href' | 'open_in
 // them.
 export const RESERVED_TOP_LEVEL_SLUGS = [
   'about-us',
-  'agropark',
-  'benefits',
   'blog',
-  'board-of-directors',
+  'connectivity-eco-system',
   'contact-us',
-  'existing-units',
-  'gallery',
-  'industrial',
-  'invitation-for-investors',
+  'customers',
+  'eco-systems',
+  'infrastructure',
+  'investors-useful-links',
+  'leadership',
   'master-plan',
+  'media',
   'news-and-events',
   'privacy-policy',
-  'strategic',
-  'tax',
-  'zone',
+  'zones',
   'admin',
   'api',
   'en',

@@ -85,6 +85,8 @@ function draftFor(selection: Selection, items: AdminNavItem[]): NavItemInput {
       file_name: null,
       open_in_new_tab: false,
       show_in_menu: true,
+      footer_group: null,
+      footer_sort: 0,
       published: true,
       translations: translationLocales.map(blankTranslation),
     };
@@ -103,6 +105,8 @@ function draftFor(selection: Selection, items: AdminNavItem[]): NavItemInput {
     file_name: item.file_name,
     open_in_new_tab: item.open_in_new_tab,
     show_in_menu: item.show_in_menu,
+    footer_group: item.footer_group,
+    footer_sort: item.footer_sort,
     published: item.published,
     translations: translationLocales.map((locale) => {
       const t = item.translations.find((tr) => tr.locale === locale);
@@ -588,6 +592,37 @@ export function NavigationManager({ items }: { items: AdminNavItem[] }) {
                       </span>
                     </span>
                   </label>
+                  <div className="space-y-1.5">
+                    <span className="block text-sm font-medium text-slate-700 dark:text-slate-200">Bottom menu (footer)</span>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <select
+                        value={draft.footer_group ?? ''}
+                        onChange={(e) =>
+                          update({ footer_group: (e.target.value || null) as 'explore' | 'information' | null })
+                        }
+                        className="rounded-lg border border-slate-200 bg-white px-2.5 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900"
+                      >
+                        <option value="">Not in the footer</option>
+                        <option value="explore">Footer: Explore column</option>
+                        <option value="information">Footer: Information column</option>
+                      </select>
+                      {draft.footer_group && (
+                        <label className="flex items-center gap-1.5 text-sm text-slate-500">
+                          Order
+                          <input
+                            type="number"
+                            min={0}
+                            value={draft.footer_sort}
+                            onChange={(e) => update({ footer_sort: Number(e.target.value) || 0 })}
+                            className="w-16 rounded-lg border border-slate-200 bg-white px-2 py-1 text-sm dark:border-slate-700 dark:bg-slate-900"
+                          />
+                        </label>
+                      )}
+                    </div>
+                    <span className="block text-sm font-normal text-slate-400">
+                      Top and bottom menus are independent: an item can be in the header, the footer or both.
+                    </span>
+                  </div>
                   <label className={checkboxLabelCls}>
                     <input
                       type="checkbox"
