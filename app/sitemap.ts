@@ -24,6 +24,7 @@ const staticRoutes = [
   { path: "/leadership/", priority: 0.5, changeFrequency: "yearly" as const },
   { path: "/leadership/dileep-sanghani/", priority: 0.4, changeFrequency: "yearly" as const },
   { path: "/leadership/k-j-patel/", priority: 0.4, changeFrequency: "yearly" as const },
+  { path: "/business-opportunities/", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/connectivity/", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/contact-us/", priority: 0.7, changeFrequency: "monthly" as const },
   { path: "/tenants/", priority: 0.7, changeFrequency: "monthly" as const },

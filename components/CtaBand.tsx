@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function CtaBand() {
+export default function CtaBand({ showOpportunities = true }: { showOpportunities?: boolean }) {
   return (
     <section className="cta-section">
       <div className="cta-band" data-reveal="">
@@ -15,9 +15,11 @@ export default function CtaBand() {
             <Link className="btn btn--green btn--lg" href="/contact-us/">
               Talk to our team
             </Link>
-            <Link className="btn btn--outline btn--lg" href="/business-opportunities/">
-              Business Opportunities
-            </Link>
+            {showOpportunities && (
+              <Link className="btn btn--outline btn--lg" href="/business-opportunities/">
+                Business Opportunities
+              </Link>
+            )}
           </div>
         </div>
       </div>

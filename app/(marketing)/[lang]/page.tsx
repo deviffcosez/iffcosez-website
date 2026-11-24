@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Building2 } from "lucide-react";
+import PanelBanner from "@/components/PanelBanner";
 import StrategicLocation from "@/components/StrategicLocation";
 import CtaBand from "@/components/CtaBand";
 import { chairman, directors, managingDirector } from "@/lib/leadership";
@@ -58,6 +59,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <PanelBanner />
 
       {/* ================= ABOUT + STATS ================= */}
       <section id="about" className="home-about">
