@@ -95,12 +95,10 @@ export function navItemNeedsAnchor(item: Pick<NavRow, 'kind' | 'href' | 'open_in
 export const RESERVED_TOP_LEVEL_SLUGS = [
   'about-us',
   'blog',
-  'connectivity-eco-system',
   'contact-us',
   'customers',
   'eco-systems',
   'infrastructure',
-  'investors-useful-links',
   'leadership',
   'master-plan',
   'media',

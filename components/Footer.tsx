@@ -26,7 +26,7 @@ export default function Footer({ lang, common, labels, nav }: FooterProps) {
       ["/about-us/", l.about],
       ["/eco-systems/", l.agropark],
       ["/connectivity-eco-system/", l.benefits],
-      ["/investors-useful-links/", l.businessOpportunities],
+      ["/business-opportunities/", l.businessOpportunities],
       ["/infrastructure/", l.infrastructure],
     ]);
   const information =
