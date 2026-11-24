@@ -235,7 +235,7 @@
 .blog-post-body li::marker { color: var(--color-secondary); }
 .blog-post-body code {
   padding: .15em .4em; border-radius: 5px;
-  background: var(--color-surface-muted); color: var(--color-primary-700);
+  background: var(--color-surface-muted); color: var(--color-link-strong);
   font-family: var(--font-mono); font-size: .9em;
 }
 

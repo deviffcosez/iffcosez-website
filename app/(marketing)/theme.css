@@ -226,6 +226,13 @@
     --color-header-bg-stuck: oklch(14% 0.020 276 / .94);
 
     --ring: 0 0 0 3px oklch(74% 0.110 276 / .4);
+    --color-link-strong: var(--color-link);
+    --color-accent-text: var(--color-secondary-400);
+    --color-accent-text-soft: var(--color-secondary-400);
+    /* tints used as backgrounds: dark in dark mode so adaptive text stays readable */
+    --color-primary-50: oklch(27% 0.055 275);
+    --color-secondary-50: oklch(27% 0.05 155);
+    --color-secondary-200: oklch(45% 0.08 155);
 
     --grad-brand-soft: oklch(24% 0.035 155);
 
@@ -263,6 +270,13 @@
   --color-header-bg-stuck: oklch(14% 0.020 276 / .94);
 
   --ring: 0 0 0 3px oklch(74% 0.110 276 / .4);
+  --color-link-strong: var(--color-link);
+  --color-accent-text: var(--color-secondary-400);
+  --color-accent-text-soft: var(--color-secondary-400);
+  /* tints used as backgrounds: dark in dark mode so adaptive text stays readable */
+  --color-primary-50: oklch(27% 0.055 275);
+  --color-secondary-50: oklch(27% 0.05 155);
+  --color-secondary-200: oklch(45% 0.08 155);
 
   --grad-brand-soft: oklch(24% 0.035 155);
 
