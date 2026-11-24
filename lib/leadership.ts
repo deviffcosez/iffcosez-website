@@ -16,9 +16,13 @@ export interface LeadershipPageSection {
   items?: string[];
 }
 
+export type LeadershipGroup = "chairman" | "board" | "management";
+
 export interface LeadershipPageProfile {
   name: string;
   role: string;
+  // Which section of /leadership/ the profile appears in.
+  group: LeadershipGroup;
   image?: string;
   imagePosition?: string;
   bio?: string;
@@ -55,6 +59,7 @@ export const directors: LeadershipProfile[] = [
 export const leadershipPageProfiles: LeadershipPageProfile[] = [
   {
     name: "Mr. Dileep Sanghani",
+    group: "chairman",
     role: "Chairman, IFFCO Kisan SEZ Limited",
     image: "/images/leadership/iffco/Mr.-Dileep-Sanghani_desktop.jpg",
     imagePosition: "30% center",
@@ -94,6 +99,7 @@ export const leadershipPageProfiles: LeadershipPageProfile[] = [
   },
   {
     name: "Mr. K. J. Patel",
+    group: "board",
     role: "Managing Director",
     image: "/images/leadership/iffco/mr-k-j-patel.jpg",
     bio: "Mr. K. J. Patel is the Managing Director of IKSEZ with effect from 31 July 2026 and the Managing Director of IFFCO. He is a highly accomplished mechanical engineer with over four decades of specialized experience in the maintenance and operation of Nitrogenous and Phosphatic fertiliser plants. He holds an engineering degree from Saurashtra University, Gujarat.",
@@ -109,20 +115,24 @@ export const leadershipPageProfiles: LeadershipPageProfile[] = [
   },
   {
     name: "Mr. Ramesh Kumar",
+    group: "board",
     role: "Director",
     image: "/images/leadership/iffco/Mr.Ramesh_0.png",
     bio: "Mr. Ramesh Kumar is a Director on the Board of IFFCO Kisan SEZ Limited. He brings with him over 43 years of rich and diverse experience in the field of Human Resource Management and Industrial Relations, with a proven track record in building and strengthening people-centric institutions. Over the course of his career, Mr. Kumar has played a pivotal role in the design and implementation of robust HR systems, including strategic manpower planning and sourcing, performance management systems (PMS), learning & development (L&D) frameworks, and legal & industrial relations mechanisms. His leadership has contributed significantly to organizational effectiveness, workforce capability building, and harmonious industrial relations. Mr. Kumar has been recognized with several awards for his outstanding contributions to the HR function, reflecting his commitment to excellence, ethical governance and employee development. He holds a Post Graduate degree in Personnel Management and Industrial Relations from Xavier Institute of Social Service (XISS), Ranchi.",
   },
   {
     name: "Smt. D. Lakshmi Parthasarathy Bhaskar",
+    group: "board",
     role: "Retired I.A.S.",
   },
   {
     name: "Mr. Balvinder Kumar",
+    group: "board",
     role: "Retired I.A.S.",
   },
   {
     name: "Dr. T. Sudhakar",
+    group: "management",
     role: "Chief Executive Officer – IFFCO Kisan SEZ Limited",
     bio: "Dr. T. Sudhakar brings together a unique blend of academic excellence, technological expertise, business development experience and a deep-rooted passion for agriculture and nature. Holding a Doctorate in Statistics, he possesses a strong analytical foundation and a keen interest in applying data-driven thinking and strategic insights to organisational growth and development.",
     sections: [

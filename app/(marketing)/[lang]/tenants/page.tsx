@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
-  title: "Customers | IFFCO Kisan SEZ",
+  title: "Tenants | IFFCO Kisan SEZ",
   description:
     "Meet the companies operating at IKSEZ and those under construction, upcoming or grounded, and learn about emerging investment opportunities.",
 };
@@ -49,7 +49,7 @@ export default function ExistingUnits() {
   return (
     <>
       <PageHero
-        title="Customers"
+        title="Tenants"
         subtitle="Attracting Global Ambitions. Creating Industrial Opportunities."
         banner="/images/infrastructur-banner.webp"
       />

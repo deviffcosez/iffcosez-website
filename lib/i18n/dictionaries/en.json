@@ -14,12 +14,12 @@
     "nav": {
       "about": "About Us",
       "leadership": "Leadership",
-      "connectivity": "Connectivity / Eco System",
+      "connectivity": "Connectivity",
       "zones": "Zones",
       "sez": "SEZ",
       "dtz": "DTZ",
       "infrastructure": "Infrastructure",
-      "customers": "Customers",
+      "customers": "Tenants",
       "ecosystems": "Eco Systems",
       "masterPlan": "Master Plan",
       "media": "Media",
@@ -32,7 +32,7 @@
       "compliances": "Compliances",
       "newsMedia": "News & Media",
       "blogs": "Blogs",
-      "contact": "Contact Us"
+      "contact": "Contact"
     }
   },
   "footer": {
@@ -47,7 +47,7 @@
       "businessOpportunities": "Business Opportunities",
       "infrastructure": "Infrastructure",
       "masterPlan": "Master Plan",
-      "existingUnits": "Existing units",
+      "existingUnits": "Tenants",
       "newsEvents": "News and Events",
       "media": "Media",
       "clientVisits": "Client Visits",

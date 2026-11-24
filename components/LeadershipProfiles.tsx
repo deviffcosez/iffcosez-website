@@ -1,4 +1,10 @@
-import { leadershipPageProfiles } from "@/lib/leadership";
+import { leadershipPageProfiles, type LeadershipGroup } from "@/lib/leadership";
+
+const GROUPS: { id: LeadershipGroup; title: string }[] = [
+  { id: "chairman", title: "Chairman" },
+  { id: "board", title: "Board of Directors" },
+  { id: "management", title: "Management Team" },
+];
 
 function initials(name: string) {
   return name
@@ -12,11 +18,15 @@ function initials(name: string) {
 export default function LeadershipProfiles() {
   return (
     <>
-      <section className="leadership-board" aria-labelledby="leadership-board-title">
+      {GROUPS.map(({ id, title }) => {
+        const profiles = leadershipPageProfiles.filter((profile) => profile.group === id);
+        if (profiles.length === 0) return null;
+        return (
+      <section className="leadership-board" aria-labelledby={`leadership-${id}-title`} key={id}>
         <div className="container">
-          <h2 id="leadership-board-title">Board of Directors</h2>
+          <h2 id={`leadership-${id}-title`}>{title}</h2>
           <div className="leadership-board__list">
-            {leadershipPageProfiles.map((profile, index) => (
+            {profiles.map((profile, index) => (
               (() => {
                 const hasMoreContent = (profile.bio?.length ?? 0) > 280 || Boolean(profile.sections?.length);
                 const sections = profile.sections?.map((section) => (
@@ -82,6 +92,8 @@ export default function LeadershipProfiles() {
           </div>
         </div>
       </section>
+        );
+      })}
     </>
   );
 }

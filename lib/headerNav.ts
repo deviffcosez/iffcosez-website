@@ -98,7 +98,7 @@ const FALLBACK_NAV: {
 }[] = [
   { key: 'about', href: '/about-us/' },
   { key: 'leadership', href: '/leadership/' },
-  { key: 'connectivity', href: '/connectivity-eco-system/' },
+  { key: 'connectivity', href: '/connectivity/' },
   {
     key: 'zones',
     href: '/zones/sez/',
@@ -108,7 +108,7 @@ const FALLBACK_NAV: {
     ],
   },
   { key: 'infrastructure', href: '/infrastructure/' },
-  { key: 'customers', href: '/customers/' },
+  { key: 'customers', href: '/tenants/' },
   { key: 'ecosystems', href: '/eco-systems/' },
   { key: 'contact', href: '/contact-us/' },
 ];

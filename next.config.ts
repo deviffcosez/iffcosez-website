@@ -33,11 +33,13 @@ const nextConfig: NextConfig = {
     // anything beneath them (leadership profiles, zone pages) following.
     const RENAMED_ROUTES: Record<string, string> = {
       "board-of-directors": "leadership",
-      benefits: "connectivity-eco-system",
-      tax: "connectivity-eco-system",
-      strategic: "connectivity-eco-system",
+      benefits: "connectivity",
+      tax: "connectivity",
+      strategic: "connectivity",
+      "connectivity-eco-system": "connectivity",
       industrial: "infrastructure",
-      "existing-units": "customers",
+      "existing-units": "tenants",
+      customers: "tenants",
       agropark: "eco-systems",
       gallery: "media",
       "invitation-for-investors": "investors-useful-links",

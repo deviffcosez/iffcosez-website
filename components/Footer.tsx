@@ -25,7 +25,7 @@ export default function Footer({ lang, common, labels, nav }: FooterProps) {
     fallback([
       ["/about-us/", l.about],
       ["/eco-systems/", l.agropark],
-      ["/connectivity-eco-system/", l.benefits],
+      ["/connectivity/", l.benefits],
       ["/business-opportunities/", l.businessOpportunities],
       ["/infrastructure/", l.infrastructure],
     ]);
@@ -33,7 +33,7 @@ export default function Footer({ lang, common, labels, nav }: FooterProps) {
     nav?.information ??
     fallback([
       ["/master-plan/", l.masterPlan],
-      ["/customers/", l.existingUnits],
+      ["/tenants/", l.existingUnits],
       ["/news-and-events/", l.newsEvents],
       ["/media/", l.media],
       ["/media/", l.clientVisits],
@@ -61,11 +61,7 @@ export default function Footer({ lang, common, labels, nav }: FooterProps) {
           <div>
             <div className="footer__brand">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo.png" alt={common.logoAlt} width={130} height={52} />
-              <span className="brand__text">
-                <span className="brand__name">{common.brandName}</span>
-                <span className="brand__tag">{common.brandTag}</span>
-              </span>
+              <img src="/images/logo.png" alt={common.logoAlt} width={164} height={52} />
             </div>
             <p className="footer__description">{labels.description}</p>
             <div className="footer__social">

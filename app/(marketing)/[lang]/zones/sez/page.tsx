@@ -41,7 +41,7 @@ export default function SezPage() {
                 <li>Other incentives offered by state and central governments</li>
               </ul>
               <div className="mt-8">
-                <Link className="btn btn--brand" href="/investors-useful-links/">Explore business opportunities</Link>
+                <Link className="btn btn--brand" href="/business-opportunities/">Explore business opportunities</Link>
               </div>
             </div>
           </div>

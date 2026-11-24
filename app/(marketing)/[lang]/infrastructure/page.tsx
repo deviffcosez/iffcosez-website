@@ -5,18 +5,14 @@ import {
   Droplets,
   GraduationCap,
   Leaf,
-  MapPin,
-  Plane,
   Route,
   ShieldCheck,
-  Ship,
-  TrainFront,
   Trees,
   Zap,
 } from "lucide-react";
+import ConnectivityLocation from "@/components/ConnectivityLocation";
 import CtaBand from "@/components/CtaBand";
 import PageHero from "@/components/PageHero";
-import RegionalDevelopmentSection from "@/components/RegionalDevelopmentSection";
 
 export const metadata: Metadata = {
   title: "Infrastructure | IFFCO Kisan SEZ",
@@ -106,22 +102,6 @@ const INFRASTRUCTURE = [
   },
 ];
 
-const CONNECTIVITY_AND_AREA = [
-  { value: "260 km", label: "From Vijayawada", icon: MapPin },
-  { value: "160 km", label: "From Tirupati", icon: MapPin },
-  { value: "200 km", label: "From Chennai", icon: MapPin },
-  { value: "50 km", label: "From Krishnapatnam Port", icon: Ship },
-  { value: "50 km", label: "From Ramayapatnam Port", icon: Ship },
-  { value: "1,899 acres", label: "Special Economic Zone (SEZ)", icon: Building2 },
-  { value: "877 acres", label: "Domestic Tariff Zone (DTZ)", icon: Building2 },
-  { value: "393 acres", label: "Green belt", icon: Trees },
-  { value: "8 km", label: "National Highway 16 frontage", icon: Route },
-  { value: "20 km", label: "From Nellore Railway Station", icon: TrainFront },
-  { value: "150 km", label: "From Tirupati Airport", icon: Plane },
-  { value: "210 km", label: "From Chennai International Airport", icon: Plane },
-  { value: "8 km", label: "From Dagadarthi (proposed Nellore Airport)", icon: Plane },
-];
-
 export default function Industrial() {
   return (
     <>
@@ -164,22 +144,7 @@ export default function Industrial() {
             </div>
           </div>
 
-          <div className="section-head section-head--center infrastructure-facts-head">
-            <span className="eyebrow">Connectivity &amp; Location</span>
-            <h2>IKSEZ at a glance</h2>
-            <p>Distances and planned land areas for the Industrial Park.</p>
-          </div>
-          <div className="infrastructure-facts" aria-label="IKSEZ connectivity and area facts">
-            {CONNECTIVITY_AND_AREA.map((item) => (
-              <article className="infrastructure-fact" key={item.label}>
-                <div className="infrastructure-fact__value">
-                  <item.icon aria-hidden="true" />
-                  <strong>{item.value}</strong>
-                </div>
-                <span>{item.label}</span>
-              </article>
-            ))}
-          </div>
+          <ConnectivityLocation />
         </div>
       </section>
 
@@ -201,8 +166,6 @@ export default function Industrial() {
           </div>
         </div>
       </section>
-
-      <RegionalDevelopmentSection />
 
       <section className="section section--alt">
         <div className="container">

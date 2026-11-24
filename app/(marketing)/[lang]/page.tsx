@@ -1,9 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Building2 } from "lucide-react";
+import StrategicLocation from "@/components/StrategicLocation";
 import CtaBand from "@/components/CtaBand";
 import { chairman, directors, managingDirector } from "@/lib/leadership";
-import { getPublishedNewsEventList, newsEventSlug, sortNewsEventsByLatest } from "@/lib/publicNewsEvents";
 import { getPublicMediaList } from "@/lib/publicMedia";
 import { COMPANY_LOGO_TAG } from "@/lib/mediaTypes";
 
@@ -19,17 +19,12 @@ const FIRST_PARTY_API_KEY = process.env.NEXT_PUBLIC_IKSEZ_PUBLISHABLE_KEY;
 
 const HERO_IMAGE = "/images/home_bg.png";
 
-function formatNewsDate(isoDate: string | null): string {
-  if (!isoDate) return "";
-  const [year, month, day] = isoDate.split("-");
-  return `${day}.${month}.${year}`;
-}
-
 export default async function Home() {
-  const [{ data: newsItems, is_success: newsLoaded }, { data: customerLogos }] = await Promise.all([
-    getPublishedNewsEventList({ apiKey: FIRST_PARTY_API_KEY, pageSize: 3 }),
-    getPublicMediaList({ apiKey: FIRST_PARTY_API_KEY, tag: COMPANY_LOGO_TAG, pageSize: 100 }),
-  ]);
+  const { data: customerLogos } = await getPublicMediaList({
+    apiKey: FIRST_PARTY_API_KEY,
+    tag: COMPANY_LOGO_TAG,
+    pageSize: 100,
+  });
 
   return (
     <>
@@ -46,14 +41,12 @@ export default async function Home() {
               <span className="hero__eyebrow">
                 <span className="dot"></span> Notified Multi Product SEZ
               </span>
-              <h1>An Agribusiness SEZ , Integrated Agropark</h1>
+              <h1>Your Gateway to Industrial Excellence</h1>
               <p className="hero__text">
-                IFFCO Kisan SEZ is being set up as an Agribusiness Special Economic Zone based on
-                and sales tax concessions provided by the Government of India to promote economic
-                activity.
+                A Strategic Industrial Destination Backed by IFFCO&apos;s Cooperative Legacy
               </p>
               <div className="hero__actions">
-                <Link className="btn btn--green btn--lg" href="/investors-useful-links/">
+                <Link className="btn btn--green btn--lg" href="/business-opportunities/">
                   Business Opportunities
                 </Link>
                 <Link className="btn btn--outline btn--lg" href="/about-us/">
@@ -62,35 +55,6 @@ export default async function Home() {
               </div>
             </div>
 
-            <aside className="hero__updates" aria-label="Latest news and events">
-              <div className="hero__updates-head">
-                <div>
-                  <span className="eyebrow">Latest updates</span>
-                  <h2>News &amp; Events</h2>
-                </div>
-                <Link className="link-arrow" href="/news-and-events/">View all</Link>
-              </div>
-              {newsLoaded && newsItems.length > 0 ? (
-                <div className="hero__update-list">
-                  {sortNewsEventsByLatest(newsItems).slice(0, 3).map((item) => (
-                    <Link className="hero__update" href={`/news-and-events/${newsEventSlug(item.title)}/`} key={item.id}>
-                      {item.gallery[0] ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img src={item.gallery[0].url} alt="" loading="lazy" />
-                      ) : (
-                        <span className="hero__update-thumb" aria-hidden="true" />
-                      )}
-                      <span>
-                        <strong>{item.title}</strong>
-                        <small>{formatNewsDate(item.event_date)}</small>
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <p className="hero__updates-empty">No news or events posted yet.</p>
-              )}
-            </aside>
           </div>
         </div>
       </section>
@@ -252,8 +216,8 @@ export default async function Home() {
                 image: "reason-7.webp",
               },
               {
-                title: "Employment and Regional Development",
-                text: "Promoting employment generation, industrial investment, local entrepreneurship and economic development.",
+                title: "Skilled Manpower",
+                text: "Access to a skilled, trainable local workforce, supported by skill-development initiatives for industrial operations.",
                 image: "reason-8.webp",
               },
             ].map((item, index) => (
@@ -272,16 +236,10 @@ export default async function Home() {
               </article>
             ))}
           </div>
-          <div className="home-investment__actions">
-            <Link className="btn btn--green" href="/connectivity-eco-system/">
-              Explore IKSEZ Benefits
-            </Link>
-            <Link className="link-arrow" href="/investors-useful-links/">
-              Explore business opportunities
-            </Link>
-          </div>
         </div>
       </section>
+
+      <StrategicLocation />
 
       <CtaBand />
     </>
