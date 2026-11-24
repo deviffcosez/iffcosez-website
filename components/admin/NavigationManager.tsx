@@ -302,11 +302,11 @@ export function NavigationManager({ items }: { items: AdminNavItem[] }) {
 
   return (
     <div className="grid gap-4 lg:grid-cols-[minmax(280px,380px)_1fr] items-start">
-      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 lg:sticky lg:top-20">
-        <div className="flex items-center justify-between gap-2 px-1 pb-2 mb-2 border-b border-slate-100 dark:border-slate-800">
+      <section className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-3 flex flex-col lg:sticky lg:top-20 lg:max-h-[calc(100vh-6rem)] max-h-[70vh]">
+        <div className="flex shrink-0 items-center justify-between gap-2 px-1 pb-2 mb-2 border-b border-slate-100 dark:border-slate-800">
           <div>
-            <h2 className="text-sm font-bold text-slate-900 dark:text-white">Header menu</h2>
-            <p className="text-[11px] text-slate-500">Top level = header bar. Hover a row to reorder or add a sub-item.</p>
+            <h2 className="text-sm font-bold text-slate-900 dark:text-white">Pages &amp; menus</h2>
+            <p className="text-[11px] text-slate-500">Top level = header bar. Hover a row to reorder or add a sub-item. The eye-off icon marks items hidden from the header.</p>
           </div>
           <button
             type="button"
@@ -319,7 +319,7 @@ export function NavigationManager({ items }: { items: AdminNavItem[] }) {
         {items.length === 0 ? (
           <p className="px-2 py-8 text-center text-xs text-slate-500">No menu items yet.</p>
         ) : (
-          <ul>{renderTree(null, 0)}</ul>
+          <ul className="min-h-0 flex-1 overflow-y-auto overscroll-contain pr-1">{renderTree(null, 0)}</ul>
         )}
       </section>
 
