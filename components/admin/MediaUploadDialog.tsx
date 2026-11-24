@@ -71,6 +71,8 @@ export function MediaUploadDialog({
   const [dragOver, setDragOver] = React.useState(false);
 
   const isLogo = type === 'company-logo';
+  const isGallery = type === 'gallery';
+  const usesOrder = isLogo || isGallery;
   const single = files.length === 1;
 
   function reset() {
@@ -154,7 +156,7 @@ export function MediaUploadDialog({
         p_tags: withMediaType(null, type),
         p_alt_text: single ? altText.trim() || null : null,
         p_link_url: single && isLogo ? link || null : null,
-        p_sort_order: single && isLogo && sortOrder.trim() !== '' ? Math.trunc(Number(sortOrder)) : null,
+        p_sort_order: single && usesOrder && sortOrder.trim() !== '' ? Math.trunc(Number(sortOrder)) : null,
       });
 
       const result = envelope as RpcEnvelope<MediaRow[]> | null;
@@ -343,6 +345,10 @@ export function MediaUploadDialog({
               ? isPublic
                 ? 'Shown in the “Our Customers” section on the home page. Transparent PNG or SVG works best.'
                 : 'Private logos are not shown on the home page — choose Public to show it.'
+              : isGallery
+                ? isPublic
+                  ? 'Shown on the Media page (Image Gallery). The caption is the alt text; a lower order shows first.'
+                  : 'Private photos are not shown on the Media page — choose Public to show it.'
               : isPublic
                 ? 'Public files can be used on this site and fetched by other sites through the Media API.'
                 : 'Private files are only visible here in the admin.'}
@@ -350,28 +356,28 @@ export function MediaUploadDialog({
 
           {files.length > 1 ? (
             <p className="text-[11px] text-slate-500 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-3 py-2">
-              Uploading {files.length} files — add {isLogo ? 'company names, links and order' : 'alt text'} on each card
+              Uploading {files.length} files — add {isLogo ? 'company names, links and order' : isGallery ? 'captions and order' : 'alt text'} on each card
               afterwards.
             </p>
           ) : (
             <>
               <div>
                 <label htmlFor="media-upload-alt" className={LABEL_CLASS}>
-                  {isLogo ? 'Company name' : 'Alt text'}
+                  {isLogo ? 'Company name' : isGallery ? 'Caption' : 'Alt text'}
                 </label>
                 <input
                   id="media-upload-alt"
                   type="text"
                   value={altText}
                   onChange={(e) => setAltText(e.target.value)}
-                  placeholder={isLogo ? 'e.g. Acme Agro Foods Ltd' : 'Describe the image for screen readers'}
+                  placeholder={isLogo ? 'e.g. Acme Agro Foods Ltd' : isGallery ? 'Caption shown under the photo' : 'Describe the image for screen readers'}
                   className={FIELD_CLASS}
                 />
               </div>
 
-              {isLogo && (
-                <div className="grid grid-cols-[1fr_6rem] gap-4">
-                  <div>
+              {usesOrder && (
+                <div className={isLogo ? 'grid grid-cols-[1fr_6rem] gap-4' : 'w-28'}>
+                  {isLogo && <div>
                     <label htmlFor="media-upload-link" className={LABEL_CLASS}>
                       Website link <span className="font-normal text-slate-400">(optional)</span>
                     </label>
@@ -383,7 +389,7 @@ export function MediaUploadDialog({
                       placeholder="https://"
                       className={FIELD_CLASS}
                     />
-                  </div>
+                  </div>}
                   <div>
                     <label htmlFor="media-upload-order" className={LABEL_CLASS}>
                       Order

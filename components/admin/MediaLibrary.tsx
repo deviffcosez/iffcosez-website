@@ -180,6 +180,13 @@ export function MediaLibrary({ initialMedia }: { initialMedia: MediaRow[] }) {
         </button>
       </div>
 
+      {typeFilter === 'gallery' && (
+        <p className="text-[11px] text-slate-500 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5">
+          Public gallery photos appear on the Media page (Image Gallery). Put the caption in the alt text and an order
+          number (lower shows first).
+        </p>
+      )}
+
       {typeFilter === 'company-logo' && (
         <p className="text-[11px] text-slate-500 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-2.5">
           Public company logos appear in the &ldquo;Our Customers&rdquo; strip on the home page. Put the company name in
@@ -266,22 +273,22 @@ export function MediaLibrary({ initialMedia }: { initialMedia: MediaRow[] }) {
                 </select>
                 <input
                   type="text"
-                  placeholder={getMediaType(item.tags) === 'company-logo' ? 'Company name (alt text)' : 'Alt text'}
+                  placeholder={getMediaType(item.tags) === 'company-logo' ? 'Company name (alt text)' : getMediaType(item.tags) === 'gallery' ? 'Caption (alt text)' : 'Alt text'}
                   aria-label="Alt text"
                   defaultValue={item.alt_text ?? ''}
                   onBlur={(e) => handleAltTextBlur(item, e.target.value)}
                   className="w-full px-1.5 py-1 rounded-md text-[10px] border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:outline-none focus:border-primary-500"
                 />
-                {getMediaType(item.tags) === 'company-logo' && (
+                {(getMediaType(item.tags) === 'company-logo' || getMediaType(item.tags) === 'gallery') && (
                   <div className="flex items-center gap-1">
-                    <input
+                    {getMediaType(item.tags) === 'company-logo' && <input
                       type="url"
                       placeholder="Website link"
                       aria-label="Website link"
                       defaultValue={item.link_url ?? ''}
                       onBlur={(e) => handleLinkUrlBlur(item, e.target.value)}
                       className="min-w-0 flex-1 px-1.5 py-1 rounded-md text-[10px] border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 focus:outline-none focus:border-primary-500"
-                    />
+                    />}
                     <input
                       type="number"
                       step={1}

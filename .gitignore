@@ -22,3 +22,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# staging folder for manual Supabase Storage uploads
+/supabase-upload/

@@ -6,11 +6,14 @@
 export const MEDIA_TYPES = [
   { value: 'general', label: 'General', tag: null },
   { value: 'company-logo', label: 'Company logo', tag: 'company-logo' },
+  { value: 'gallery', label: 'Gallery photo', tag: 'gallery' },
 ] as const;
 
 export type MediaType = (typeof MEDIA_TYPES)[number]['value'];
 
 export const COMPANY_LOGO_TAG = 'company-logo';
+// Shown on the Media page (Image Gallery): alt text = caption, order = position.
+export const GALLERY_TAG = 'gallery';
 
 const TYPE_TAGS: string[] = MEDIA_TYPES.flatMap((t) => (t.tag ? [t.tag] : []));
 
