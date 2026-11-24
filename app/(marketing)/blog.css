@@ -126,8 +126,8 @@
 .blog-card__cat {
   position: absolute; top: var(--sp-3); left: var(--sp-3); z-index: 1;
   padding: .3rem .8rem; border-radius: var(--radius-pill);
-  background: rgba(14, 16, 32, .78); color: var(--color-white); backdrop-filter: blur(6px);
-  font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
+  background: color-mix(in srgb, var(--color-ink) 78%, transparent); color: var(--color-white); backdrop-filter: blur(6px);
+  font-size: var(--fs-10); font-weight: 800; letter-spacing: .05em; text-transform: uppercase;
 }
 .blog-card__meta {
   display: flex; align-items: center; gap: .65rem;
@@ -135,7 +135,7 @@
 }
 .blog-card__meta span { display: inline-flex; align-items: center; gap: .3rem; }
 .blog-card__meta svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; color: var(--color-secondary); }
-.media-card .blog-card__title { margin-bottom: var(--sp-2); font-size: 18px; line-height: 1.3; }
+.media-card .blog-card__title { margin-bottom: var(--sp-2); font-size: var(--fs-18); line-height: 1.3; }
 .media-card .blog-card__title a { color: var(--color-heading); }
 .media-card .blog-card__title a:hover { color: var(--color-primary); }
 .blog-card__excerpt {
@@ -161,7 +161,7 @@
   padding: var(--sp-6); text-align: center; font-size: var(--fs-sm); font-weight: 600;
   background: color-mix(in oklch, red 8%, transparent);
   border: 1px solid color-mix(in oklch, red 25%, transparent);
-  border-radius: var(--radius-lg); color: #c0362c;
+  border-radius: var(--radius-lg); color: var(--color-error);
 }
 
 /* ---------- Skeleton (Suspense fallback) ---------- */
@@ -205,7 +205,7 @@
 /* Matches the H1 scale used site-wide by PageHero (components.css
    .page-hero h1, 29px) — a detail-page title shouldn't be larger than
    the H1 used everywhere else in the app. */
-.blog-post__title { font-size: 29px; }
+.blog-post__title { font-size: var(--fs-29); }
 .blog-post__meta-top { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-4); }
 .blog-post__readtime { display: inline-flex; align-items: center; gap: .35rem; font-size: var(--fs-xs); color: var(--color-muted); }
 .blog-post__readtime svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
@@ -236,7 +236,7 @@
 .blog-post-body code {
   padding: .15em .4em; border-radius: 5px;
   background: var(--color-surface-muted); color: var(--color-primary-700);
-  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .9em;
+  font-family: var(--font-mono); font-size: .9em;
 }
 
 .blog-post__tags { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: var(--sp-8); padding-top: var(--sp-6); border-top: 1px solid var(--color-border); }

@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 :lang(te) :is(h1, h2, h3, h4, h5, h6) { letter-spacing: 0; }
 
 h1 { font-size: var(--fs-4xl); }
-h2 { font-size: 29px; }
+h2 { font-size: var(--fs-29); }
 h3 { font-size: var(--fs-2xl); }
 h4 { font-size: var(--fs-xl); }
 h5 { font-size: var(--fs-lg); }
@@ -92,14 +92,15 @@ hr {
 .container--narrow { max-width: var(--container-narrow); }
 
 .section { padding-block: var(--section-y); position: relative; isolation: isolate; }
-.section--alt { background: var(--color-bg-alt); }
+.section--alt { background: var(--color-bg); border-top: 1px solid var(--color-divider); }
 .section--alt::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .55;
+  display: none; /* grid texture removed */
   background-image: linear-gradient(90deg, color-mix(in oklch, var(--color-primary) 6%, transparent) 1px, transparent 1px), linear-gradient(color-mix(in oklch, var(--color-primary) 5%, transparent) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
 }
-.section--soft { background: linear-gradient(135deg, var(--color-primary-50), var(--color-secondary-50)); }
+.section--soft { background: var(--color-bg); border-top: 1px solid var(--color-divider); }
 .section--tight { padding-block: calc(var(--section-y) * .6); }
 
 .grid { display: grid; gap: var(--sp-6); }
@@ -121,7 +122,7 @@ hr {
 .mt-6 { margin-top: var(--sp-6); }
 .mt-8 { margin-top: var(--sp-8); }
 .on-dark, .on-dark h1, .on-dark h2, .on-dark h3, .on-dark h4 { color: var(--color-white); }
-.on-dark p, .on-dark li { color: rgba(255, 255, 255, .82); }
+.on-dark p, .on-dark li { color: color-mix(in srgb, var(--color-white) 82%, transparent); }
 
 .sr-only {
   position: absolute; width: 1px; height: 1px;
@@ -155,5 +156,5 @@ hr {
 /* ---------- Print ---------- */
 @media print {
   .site-header, .site-footer, .hero-slider, .floating-cta, .backtotop { display: none !important; }
-  body { color: #000; }
+  body { color: var(--color-black); }
 }

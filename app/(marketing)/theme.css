@@ -50,7 +50,7 @@
 
   /* ---- Semantic — light mode ---- */
   --color-bg: var(--color-white);
-  --color-bg-alt: var(--color-neutral-50);
+  --color-bg-alt: var(--color-white);          /* white: no grey wash on alternate sections */
   --color-bg-invert: var(--color-primary-900);
   --color-surface: var(--color-white);
   --color-surface-muted: var(--color-neutral-50);
@@ -65,12 +65,24 @@
 
   --ring: 0 0 0 3px oklch(37.75% 0.1559 274.67 / .35);
 
+  /* ---- Component tokens (follow a logo re-theme; flip in dark mode) ---- */
+  --color-divider: var(--color-neutral-200);
+  --color-band-bg: var(--color-bg);
+  --color-band-text: var(--color-text);
+  --color-band-heading: var(--color-heading);
+  --color-footer-text: var(--color-neutral-600);
+  --color-footer-muted: var(--color-neutral-500);
+  --color-footer-chip: var(--color-neutral-100);
+  --color-gold: var(--color-accent);
+  --color-link-strong: var(--color-primary-700);
+  --color-shadow-brand: oklch(34.25% 0.1419 274 / .15);
+
   /* ---- Gradients ---- */
-  --grad-brand: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-700) 45%, var(--color-secondary) 100%);
-  --grad-brand-soft: linear-gradient(135deg, var(--color-primary-50) 0%, var(--color-secondary-50) 100%);
+  --grad-brand: var(--color-primary);                 /* flat: gradients removed per customer feedback */
+  --grad-brand-soft: var(--color-secondary-50);
   --grad-deep: linear-gradient(160deg, var(--color-primary-900) 0%, var(--color-primary-700) 60%, var(--color-secondary-900) 100%);
   --grad-veil: linear-gradient(90deg, oklch(24.33% 0.0910 275.56 / .92) 0%, oklch(29.48% 0.1186 274.51 / .72) 45%, oklch(60.29% 0.1645 150.39 / .25) 100%);
-  --grad-rule: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  --grad-rule: var(--color-secondary);
 
   /* ---- Typography ---- */
   /* --font-telugu follows the Latin brand fonts: Latin text keeps Inter/
@@ -78,6 +90,47 @@
      Sans Telugu instead of an OS font that varies per device. */
   --font-sans: var(--font-inter), var(--font-telugu), "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-jakarta), var(--font-inter), var(--font-telugu), "Segoe UI", -apple-system, sans-serif;
+
+  /* ---- Fixed tokens: neutral bases, status, third-party brands, leader page ---- */
+  --color-black: #000;
+  --color-ink: oklch(18% 0.04 277);                      /* shadow / scrim base */
+  --color-navy: rgb(7, 18, 48);                          /* hero photo overlay */
+  --color-error: #d92d20;
+  --color-error-strong: #b42318;
+  --color-whatsapp: #00b879;
+  --color-x-blue: #1d9bf0;
+  --color-x-ink: #0f1419;
+  --color-x-muted: #536471;
+  --color-leader-green: #1d8134;
+  --color-leader-box: #008c44;
+  --color-leader-yellow: #ffea00;
+  --color-leader-line: #f4e27a;
+
+  /* ---- Fonts (single source; families are loaded in [lang]/layout.tsx) ---- */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-leader: var(--font-montserrat), var(--font-sans);
+
+  /* ---- Fixed type scale (px values used across components) ---- */
+  --fs-10: 0.625rem;
+  --fs-11: 0.6875rem;
+  --fs-12: 0.75rem;
+  --fs-13: 0.8125rem;
+  --fs-14: 0.875rem;
+  --fs-15: 0.9375rem;
+  --fs-16: 1rem;
+  --fs-17: 1.0625rem;
+  --fs-18: 1.125rem;
+  --fs-19: 1.1875rem;
+  --fs-20: 1.25rem;
+  --fs-21-875: 1.36719rem;
+  --fs-22-75: 1.42188rem;
+  --fs-25: 1.5625rem;
+  --fs-27: 1.6875rem;
+  --fs-29: 1.8125rem;
+  --fs-36: 2.25rem;
+  --fs-39: 2.4375rem;
+  --fs-42: 2.625rem;
+  --fs-48: 3rem;
 
   --fs-xs: .75rem;
   --fs-sm: .875rem;
@@ -174,7 +227,7 @@
 
     --ring: 0 0 0 3px oklch(74% 0.110 276 / .4);
 
-    --grad-brand-soft: linear-gradient(135deg, oklch(24% 0.035 275) 0%, oklch(24% 0.035 155) 100%);
+    --grad-brand-soft: oklch(24% 0.035 155);
 
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, .3);
     --shadow-sm: 0 2px 10px rgba(0, 0, 0, .35);
@@ -211,7 +264,7 @@
 
   --ring: 0 0 0 3px oklch(74% 0.110 276 / .4);
 
-  --grad-brand-soft: linear-gradient(135deg, oklch(24% 0.035 275) 0%, oklch(24% 0.035 155) 100%);
+  --grad-brand-soft: oklch(24% 0.035 155);
 
   --shadow-xs: 0 1px 2px rgba(0, 0, 0, .3);
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, .35);

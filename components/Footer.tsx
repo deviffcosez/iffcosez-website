@@ -96,7 +96,7 @@ export default function Footer({ lang, common, labels, nav }: FooterProps) {
           <div>
             <p className="footer__title">{labels.contactTitle}</p>
             <p>
-              <strong style={{ color: "#17234d" }}>{labels.companyName}</strong>
+              <strong style={{ color: "var(--color-heading)" }}>{labels.companyName}</strong>
             </p>
             <address className="footer__address">
               {labels.addressLines.map((line, i) => (
