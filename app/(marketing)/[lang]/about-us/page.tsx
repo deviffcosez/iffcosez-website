@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
 import FeatureCard from "@/components/FeatureCard";
+import PageHero from "@/components/PageHero";
 
 export const metadata: Metadata = {
   title: "About us | IFFCO Kisan SEZ",
@@ -11,6 +12,11 @@ export const metadata: Metadata = {
 export default function AboutUs() {
   return (
     <>
+      <PageHero
+        title="About Us"
+        subtitle="A wholly owned subsidiary of IFFCO, building a world-class industrial ecosystem in SPSR Nellore."
+      />
+
       {/* ================= ABOUT + STATS ================= */}
       <section className="home-about about-page-about">
         <div className="container">

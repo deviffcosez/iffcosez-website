@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
 import LeadershipProfiles from "@/components/LeadershipProfiles";
 
 export const metadata: Metadata = {
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
 export default function BoardOfDirectors() {
   return (
     <>
+      <PageHero
+        title="Leadership"
+        subtitle="The Board of Directors and leadership guiding IFFCO Kisan SEZ Limited."
+      />
       <LeadershipProfiles />
       <CtaBand />
     </>

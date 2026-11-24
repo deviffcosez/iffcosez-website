@@ -15,6 +15,7 @@ import {
   Zap,
 } from "lucide-react";
 import CtaBand from "@/components/CtaBand";
+import PageHero from "@/components/PageHero";
 import RegionalDevelopmentSection from "@/components/RegionalDevelopmentSection";
 
 export const metadata: Metadata = {
@@ -124,11 +125,10 @@ const CONNECTIVITY_AND_AREA = [
 export default function Industrial() {
   return (
     <>
-      <section className="section section--tight infrastructure-intro">
-        <div className="container">
-          <h1>An Industrial Destination That&apos;s Shaping the Future of Industry.</h1>
-        </div>
-      </section>
+      <PageHero
+        title="Infrastructure"
+        subtitle="An Industrial Destination That's Shaping the Future of Industry."
+      />
 
       <section className="section section--alt infrastructure-overview">
         <div className="container">
