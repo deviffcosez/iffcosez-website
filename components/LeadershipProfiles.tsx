@@ -6,6 +6,13 @@ const GROUPS: { id: LeadershipGroup; title: string }[] = [
   { id: "management", title: "Management Team" },
 ];
 
+type LeadershipProfilesProps = {
+  /** Show only this group (e.g. on its own page). Default: all groups. */
+  group?: LeadershipGroup;
+  /** Hide the group heading when the page's hero already carries the title. */
+  hideTitle?: boolean;
+};
+
 function initials(name: string) {
   return name
     .replace(/^(Mr\.|Mrs\.|Ms\.|Smt\.|Dr\.)\s*/i, "")
@@ -15,16 +22,17 @@ function initials(name: string) {
     .join("");
 }
 
-export default function LeadershipProfiles() {
+export default function LeadershipProfiles({ group, hideTitle = false }: LeadershipProfilesProps = {}) {
+  const groups = group ? GROUPS.filter((entry) => entry.id === group) : GROUPS;
   return (
     <>
-      {GROUPS.map(({ id, title }) => {
+      {groups.map(({ id, title }) => {
         const profiles = leadershipPageProfiles.filter((profile) => profile.group === id);
         if (profiles.length === 0) return null;
         return (
       <section className="leadership-board" aria-labelledby={`leadership-${id}-title`} key={id}>
         <div className="container">
-          <h2 id={`leadership-${id}-title`}>{title}</h2>
+          <h2 id={`leadership-${id}-title`} className={hideTitle ? "sr-only" : undefined}>{title}</h2>
           <div className="leadership-board__list">
             {profiles.map((profile, index) => (
               (() => {

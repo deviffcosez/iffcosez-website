@@ -1,7 +1,13 @@
 import Link from "next/link";
 
-// Location map (India > Andhra Pradesh > Nellore). The whole image links to
-// the contact page.
+const MAP_QUERY =
+  "IFFCO Kisan SEZ, Racharlapadu, Kodavaluru Mandalam, SPSR Nellore, Andhra Pradesh";
+const MAP_ZOOM = 6; // zoomed out to show southern India around Nellore
+const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=${MAP_ZOOM}&output=embed`;
+const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`;
+
+// Live location map (same Google Maps embed as the contact page), with a
+// directions link and a route to the contact page.
 export default function StrategicLocation() {
   return (
     <section className="section strategic-location" aria-labelledby="strategic-location-title">
@@ -11,20 +17,24 @@ export default function StrategicLocation() {
           <h2 id="strategic-location-title">Strategic Location</h2>
           <p>IFFCO Kisan SEZ is in Nellore district, Andhra Pradesh, on the Chennai–Kolkata economic corridor.</p>
         </div>
-        <Link
-          className="strategic-location__map"
-          href="/contact-us/"
-          aria-label="Strategic location map of India, Andhra Pradesh and Nellore. Contact us"
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/images/strategic-location.webp"
-            alt="Map showing Nellore in Andhra Pradesh, India"
-            width={1412}
-            height={1114}
+        <div className="strategic-location__frame">
+          <iframe
+            className="strategic-location__iframe"
+            src={MAP_EMBED_SRC}
+            title="IFFCO Kisan SEZ location map"
             loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
           />
-        </Link>
+        </div>
+        <div className="strategic-location__actions">
+          <a className="btn btn--green" href={MAP_LINK} target="_blank" rel="noopener noreferrer">
+            Get directions →
+          </a>
+          <Link className="btn btn--outline" href="/contact-us/">
+            Contact us
+          </Link>
+        </div>
       </div>
     </section>
   );

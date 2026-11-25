@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Building2 } from "lucide-react";
 import PanelBanner from "@/components/PanelBanner";
 import StrategicLocation from "@/components/StrategicLocation";
+import ConnectivityLocation from "@/components/ConnectivityLocation";
 import CtaBand from "@/components/CtaBand";
 import { chairman, directors, managingDirector } from "@/lib/leadership";
 import { getPublicMediaList } from "@/lib/publicMedia";
@@ -87,34 +88,11 @@ export default async function Home() {
         </div>
       </section>
 
-      <section id="zones" className="home-reference-section home-reference-section--alt">
+      <StrategicLocation />
+
+      <section className="section section--alt infrastructure-overview">
         <div className="container">
-          <div className="home-section-head">
-            <div>
-              <div className="home-reference__kicker">Our Zones</div>
-              <h2>Two strategic zones, one integrated vision</h2>
-            </div>
-          </div>
-          <div className="home-zone-grid">
-            <article className="home-zone-card">
-              <div className="home-zone-card__image home-zone-card__image--sez" />
-              <div className="home-zone-card__body">
-                <h3>SEZ</h3>
-                <div className="home-zone-card__sub">Special Economic Zone</div>
-                <p>A dedicated zone for export-oriented units with world-class infrastructure, customs benefits and seamless logistics support.</p>
-                <Link href="/zones/sez/">Explore SEZ →</Link>
-              </div>
-            </article>
-            <article className="home-zone-card">
-              <div className="home-zone-card__image home-zone-card__image--dtz" />
-              <div className="home-zone-card__body">
-                <h3>DTZ</h3>
-                <div className="home-zone-card__sub">Domestic Tariff Zone</div>
-                <p>Designed for domestic market industries with flexible operations and a conducive business environment.</p>
-                <Link href="/zones/dtz/">Explore DTZ →</Link>
-              </div>
-            </article>
-          </div>
+          <ConnectivityLocation />
         </div>
       </section>
 
@@ -241,8 +219,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      <StrategicLocation />
 
       <CtaBand />
     </>

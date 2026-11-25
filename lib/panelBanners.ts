@@ -55,7 +55,7 @@ export interface PanelBanner {
 export const PANEL_BANNERS: PanelBanner[] = [
   {
     id: "gateway",
-    headline: "Your Gateway to Industrial Growth in Andhra Pradesh",
+    headline: "Your Gateway to Industrial Growth in Southern India",
     points: [
       { label: "Infrastructure", icon: Building2 },
       { label: "Industries", icon: Factory },

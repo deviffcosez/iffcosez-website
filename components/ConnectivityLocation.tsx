@@ -52,7 +52,7 @@ export default function ConnectivityLocation() {
     <>
       <div className="section-head section-head--center infrastructure-facts-head">
         <span className="eyebrow">Connectivity &amp; Location</span>
-        <h2>IKSEZ at a glance</h2>
+        <h2>IKSEZ logistical convenience</h2>
         <p>Distances and planned land areas for the Industrial Park.</p>
       </div>
       {CONNECTIVITY_AND_AREA.map((group) => (

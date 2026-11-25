@@ -98,6 +98,45 @@ export default function AboutUs() {
         </div>
       </section>
 
+      {/* ================= IKSEZ IN BRIEF ================= */}
+      <section className="home-reference-section about-brief">
+        <div className="container">
+          <div className="home-section-head">
+            <div>
+              <div className="home-reference__kicker">At a Glance</div>
+              <h2>IKSEZ in Brief</h2>
+            </div>
+          </div>
+          <p>
+            IFFCO Kisan SEZ Limited (IKSEZ) is a wholly owned subsidiary and a unique initiative of
+            IFFCO to promote industrial growth. IKSEZ is being developed in an area of 2776.23
+            Acres land at SPSR Nellore, Andhra Pradesh. Major features:
+          </p>
+          <ul className="check-list">
+            <li>A Multiproduct Special Economic Zone (SEZ) spanning approximately 1,899 acres.</li>
+            <li>
+              A Domestic Tariff Area (DTA) covering about 877.23 acres which is designated for
+              initiatives focused on the domestic market.
+            </li>
+            <li>Well connected by Road, Rail and Air.</li>
+            <li>
+              The six lane National Highway 16 which connects Chennai and Kolkata passes through
+              IKSEZ.
+            </li>
+            <li>Chennai–Kolkata Rail link is adjacent to the industrial park.</li>
+            <li>
+              In the close proximity of international airports at Chennai and Tirupati; a new
+              domestic airport is also coming up at Dagadarthi, within 15 km distance from the
+              site.
+            </li>
+            <li>
+              The nearest port, Krishnapatnam Port, is about 50 km away; the upcoming Ramayapatnam
+              Port is about 55 km away; and Chennai Port is approximately 200 km away.
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <CtaBand />
     </>
   );
