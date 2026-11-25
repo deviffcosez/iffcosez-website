@@ -3,7 +3,19 @@
 import { FormEvent } from "react";
 import { useState } from "react";
 
+type EnquiryType = "investor" | "others";
+
+// Extra details asked of investors. The keys are stored under the lead's
+// `data` and shown in Admin > Leads, so keep them stable.
+const INVESTOR_FIELDS = [
+  { name: "project_undertaken_by", label: "Project Undertaken by", placeholder: "Company / promoter name" },
+  { name: "land_requirement", label: "Land Requirement", placeholder: "e.g. 25 acres" },
+  { name: "water_requirement", label: "Water Requirement", placeholder: "e.g. 500 KLD" },
+  { name: "electricity_requirement", label: "Electricity Requirement", placeholder: "e.g. 5 MW" },
+] as const;
+
 export default function ContactForm() {
+  const [enquiryType, setEnquiryType] = useState<EnquiryType>("others");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
@@ -19,6 +31,9 @@ export default function ContactForm() {
     const v = (name: string) =>
       (form.elements.namedItem(name) as HTMLInputElement | HTMLTextAreaElement).value.trim();
     const apiKey = process.env.NEXT_PUBLIC_IKSEZ_PUBLISHABLE_KEY;
+    const isInvestor = enquiryType === "investor";
+    const investorDetails: Record<string, string> = {};
+    if (isInvestor) for (const field of INVESTOR_FIELDS) investorDetails[field.name] = v(field.name);
 
     setFeedback(null);
     setIsSubmitting(true);
@@ -30,9 +45,9 @@ export default function ContactForm() {
         body: JSON.stringify({
           first_name: v("name"),
           email: v("email"),
-          lead_source: "Website contact form",
+          lead_source: isInvestor ? "Website contact form - Investor" : "Website contact form - Others",
           description: v("message"),
-          data: { subject: v("subject") },
+          data: { enquiry_type: enquiryType, subject: v("subject"), ...investorDetails },
         }),
       });
       const result = (await response.json()) as { is_success?: boolean; message?: string };
@@ -42,6 +57,7 @@ export default function ContactForm() {
       }
 
       form.reset();
+      setEnquiryType("others");
       setFeedback({ type: "success", message: "Thank you. Your message has been sent successfully." });
     } catch (error) {
       setFeedback({
@@ -55,6 +71,23 @@ export default function ContactForm() {
 
   return (
     <form className="form-grid" id="contact-form" noValidate onSubmit={handleSubmit}>
+      <div className="choice-group" role="radiogroup" aria-labelledby="cf-type-label">
+        <span className="choice-group__label" id="cf-type-label">
+          I am an <span className="required" aria-hidden="true">*</span>
+        </span>
+        {(["investor", "others"] as const).map((type) => (
+          <label className="choice" key={type}>
+            <input
+              type="radio"
+              name="enquiry_type"
+              value={type}
+              checked={enquiryType === type}
+              onChange={() => setEnquiryType(type)}
+            />
+            <span>{type === "investor" ? "Investor" : "Others"}</span>
+          </label>
+        ))}
+      </div>
       <div className="form-row">
         <div className="field">
           <label htmlFor="cf-name">
@@ -69,6 +102,18 @@ export default function ContactForm() {
           <input type="email" id="cf-email" name="email" autoComplete="email" placeholder="you@company.com" required />
         </div>
       </div>
+      {enquiryType === "investor" && (
+        <div className="form-row">
+          {INVESTOR_FIELDS.map((field) => (
+            <div className="field" key={field.name}>
+              <label htmlFor={`cf-${field.name}`}>
+                {field.label} <span className="required" aria-hidden="true">*</span>
+              </label>
+              <input type="text" id={`cf-${field.name}`} name={field.name} placeholder={field.placeholder} required />
+            </div>
+          ))}
+        </div>
+      )}
       <div className="field">
         <label htmlFor="cf-subject">
           Subject <span className="required" aria-hidden="true">*</span>

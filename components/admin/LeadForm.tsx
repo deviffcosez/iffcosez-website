@@ -28,6 +28,7 @@ export interface LeadFormLead
     | 'description'
     | 'tags'
     | 'converted_at'
+    | 'data'
   > {
   address: { address_line?: string; city?: string; state?: string; postal_code?: string; country?: string } | null;
 }
@@ -54,12 +55,45 @@ function toDatetimeLocal(iso: string | null): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
+// Labels for what the public contact form stores under `data`. Any other key
+// (from a third-party site posting to /api/leads) is shown with its name
+// tidied up, so nothing submitted is hidden from the admin.
+const ENQUIRY_LABELS: Record<string, string> = {
+  enquiry_type: 'Enquiry type',
+  subject: 'Subject',
+  project_undertaken_by: 'Project Undertaken by',
+  land_requirement: 'Land Requirement',
+  water_requirement: 'Water Requirement',
+  electricity_requirement: 'Electricity Requirement',
+};
+const ENQUIRY_ORDER = Object.keys(ENQUIRY_LABELS);
+
+function enquiryEntries(data: LeadRow['data'] | undefined): [string, string][] {
+  return Object.entries(data ?? {})
+    .filter(([, value]) => value !== null && value !== '' && typeof value !== 'object')
+    .map(([key, value]): [string, string] => {
+      const text = String(value);
+      return [
+        ENQUIRY_LABELS[key] ?? key.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase()),
+        key === 'enquiry_type' ? text.charAt(0).toUpperCase() + text.slice(1) : text,
+      ];
+    })
+    .sort(([a], [b]) => {
+      const rank = (label: string) => {
+        const i = ENQUIRY_ORDER.findIndex((key) => ENQUIRY_LABELS[key] === label);
+        return i === -1 ? ENQUIRY_ORDER.length : i;
+      };
+      return rank(a) - rank(b);
+    });
+}
+
 export function LeadForm({ lead }: { lead?: LeadFormLead }) {
   const [state, formAction, pending] = useActionState(saveLead, { error: null });
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [deletePending, startDeleteTransition] = useTransition();
 
+  const enquiry = enquiryEntries(lead?.data);
   const fullName = lead ? [lead.first_name, lead.last_name].filter(Boolean).join(' ') : null;
 
   function handleDelete() {
@@ -120,6 +154,19 @@ export function LeadForm({ lead }: { lead?: LeadFormLead }) {
             <p className="text-xs font-semibold text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
               {deleteError}
             </p>
+          )}
+
+          {enquiry.length > 0 && (
+            <CollapsibleSection title="Website Enquiry">
+              <dl className="grid sm:grid-cols-2 gap-x-6 gap-y-4">
+                {enquiry.map(([label, value]) => (
+                  <div key={label}>
+                    <dt className={labelCls}>{label}</dt>
+                    <dd className="text-[13px] text-slate-800 dark:text-slate-200 break-words">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </CollapsibleSection>
           )}
 
           <CollapsibleSection title="Contact Info">

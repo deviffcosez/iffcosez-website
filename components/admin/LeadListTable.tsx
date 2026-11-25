@@ -9,7 +9,7 @@ import type { LeadRow } from '@/lib/publicLeads';
 
 export type LeadListRow = Pick<
   LeadRow,
-  'id' | 'first_name' | 'last_name' | 'company' | 'email' | 'phone' | 'status' | 'rating' | 'created_at'
+  'id' | 'first_name' | 'last_name' | 'company' | 'email' | 'phone' | 'lead_source' | 'status' | 'rating' | 'created_at'
 >;
 
 const STATUS_BADGE_CLS: Record<LeadListRow['status'], string> = {
@@ -52,6 +52,17 @@ const columns: DataTableColumn<LeadListRow>[] = [
         {lead.phone && <div className="text-slate-400">{lead.phone}</div>}
       </div>
     ),
+  },
+  {
+    key: 'lead_source',
+    header: 'Source',
+    accessor: (lead) => lead.lead_source ?? '',
+    render: (lead) =>
+      lead.lead_source ? (
+        <span className="text-xs text-slate-500">{lead.lead_source}</span>
+      ) : (
+        <span className="text-xs text-slate-300 dark:text-slate-700">—</span>
+      ),
   },
   {
     key: 'status',
