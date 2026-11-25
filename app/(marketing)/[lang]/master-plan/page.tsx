@@ -2,6 +2,10 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/CtaBand";
+import { documentFileUrl } from "@/lib/navTree";
+
+// General layout PDF in the website-documents storage bucket.
+const MASTER_PLAN_PDF = documentFileUrl("57b139e2-9afc-4620-8363-b6e58db447d9/IKSEZ-site-plan_LTP_-general-Layout.pdf");
 
 export const metadata: Metadata = {
   title: "Master Plan | IFFCO Kisan SEZ",
@@ -45,7 +49,7 @@ export default function MasterPlan() {
           </figure>
 
           <div className="flex mt-8" style={{ justifyContent: "center" }} data-reveal="">
-            <a className="btn btn--brand" href="#">
+            <a className="btn btn--brand" href={MASTER_PLAN_PDF} target="_blank" rel="noopener">
               Download Master Plan
             </a>
             <Link className="btn btn--outline" href="/contact-us/">
