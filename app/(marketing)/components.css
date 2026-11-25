@@ -391,7 +391,7 @@
   padding-block: 0;
   background:
     linear-gradient(90deg, color-mix(in srgb, var(--color-navy) 88%, transparent), color-mix(in srgb, var(--color-navy) 55%, transparent) 43%, color-mix(in srgb, var(--color-navy) 8%, transparent) 75%),
-    url("/images/home_bg.png") center / cover;
+    url("/images/home_bg.jpg") center / cover;
   color: var(--color-white);
   overflow: hidden;
 }

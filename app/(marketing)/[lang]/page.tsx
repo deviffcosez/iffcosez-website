@@ -19,7 +19,7 @@ export const revalidate = 300;
 
 const FIRST_PARTY_API_KEY = process.env.NEXT_PUBLIC_IKSEZ_PUBLISHABLE_KEY;
 
-const HERO_IMAGE = "/images/home_bg.png";
+const HERO_IMAGE = "/images/home_bg.jpg";
 
 export default async function Home() {
   const { data: customerLogos } = await getPublicMediaList({
