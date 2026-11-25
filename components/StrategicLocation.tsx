@@ -1,10 +1,5 @@
 import Link from "next/link";
-
-const MAP_QUERY =
-  "IFFCO Kisan SEZ, Racharlapadu, Kodavaluru Mandalam, SPSR Nellore, Andhra Pradesh";
-const MAP_ZOOM = 6; // zoomed out to show southern India around Nellore
-const MAP_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(MAP_QUERY)}&z=${MAP_ZOOM}&output=embed`;
-const MAP_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(MAP_QUERY)}`;
+import { MAP_EMBED_SRC, MAP_LINK } from "@/lib/siteMap";
 
 // Live location map (same Google Maps embed as the contact page), with a
 // directions link and a route to the contact page.

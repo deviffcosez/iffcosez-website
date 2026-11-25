@@ -3,6 +3,7 @@ import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/CtaBand";
 import ContactForm from "@/components/ContactForm";
 import { SITE_URL } from "@/lib/siteUrl";
+import { MAP_EMBED_SRC } from "@/lib/siteMap";
 
 export const metadata: Metadata = {
   title: "Contact us | IFFCO Kisan SEZ",
@@ -103,7 +104,7 @@ export default function ContactUs() {
 
               <div className="map-embed">
                 <iframe
-                  src="https://www.google.com/maps?q=IFFCO+Kisan+SEZ,+Racharlapadu,+Kodavaluru+Mandalam,+SPSR+Nellore,+Andhra+Pradesh&output=embed"
+                  src={MAP_EMBED_SRC}
                   title="IFFCO Kisan SEZ location map"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

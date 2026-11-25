@@ -6,6 +6,9 @@ import { ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { PANEL_BANNERS } from "@/lib/panelBanners";
 
 const DELAY = 6500;
+// The frame cycles through this many solid brand colours, one per slide
+// (see the .panel-banner__frame[data-tone] rules in components.css).
+const TONES = 5;
 
 // Auto-sliding banner of the exhibition-panel messages. Slides stack in one
 // grid cell (so the height is the tallest slide, no fixed height) and cross-
@@ -44,6 +47,7 @@ export default function PanelBannerSlider({ ids }: { ids: string[] }) {
   return (
     <div
       className="panel-banner__frame"
+      data-tone={index % TONES}
       ref={rootRef}
       role="region"
       aria-roledescription="carousel"

@@ -74,6 +74,13 @@
   --color-footer-muted: var(--color-neutral-500);
   --color-footer-chip: var(--color-neutral-100);
   --color-gold: var(--color-accent);
+  /* Colour per slide of the home panel slideshow: all brand green, the same as the
+     Business Opportunities button (flat, no gradients). Set each to vary per slide. */
+  --slide-tone-0: var(--color-secondary);
+  --slide-tone-1: var(--color-secondary);
+  --slide-tone-2: var(--color-secondary);
+  --slide-tone-3: var(--color-secondary);
+  --slide-tone-4: var(--color-secondary);
   --color-link-strong: var(--color-primary-700);
   --color-shadow-brand: oklch(34.25% 0.1419 274 / .15);
 
@@ -94,6 +101,7 @@
   /* ---- Fixed tokens: neutral bases, status, third-party brands, leader page ---- */
   --color-black: #000;
   --color-ink: oklch(18% 0.04 277);                      /* shadow / scrim base */
+  --color-iffco-blue: #142c74;                           /* sampled from the IFFCO wordmark; CTA band background */
   --color-navy: rgb(7, 18, 48);                          /* hero photo overlay */
   --color-error: #d92d20;
   --color-error-strong: #b42318;
