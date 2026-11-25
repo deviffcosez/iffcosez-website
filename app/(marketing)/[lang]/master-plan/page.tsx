@@ -20,9 +20,9 @@ export default function MasterPlan() {
 
       <section className="section">
         <div className="container">
-          <figure style={{ margin: 0 }} data-reveal="">
+          <figure style={{ margin: "0 auto", maxWidth: 760 }} data-reveal="">
             <a
-              href="/images/map-iksez.webp"
+              href="/images/master-plan.png"
               data-lightbox=""
               data-caption="IFFCO Kisan SEZ — Master Plan"
               style={{
@@ -35,10 +35,10 @@ export default function MasterPlan() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/map-iksez.webp"
+                src="/images/master-plan.png"
                 alt="IFFCO Kisan SEZ master plan"
                 loading="lazy"
-                style={{ width: "100%" }}
+                style={{ width: "100%", height: "auto", display: "block", background: "#fff" }}
               />
             </a>
             <figcaption className="figure-caption">IFFCO Kisan SEZ &mdash; Master Plan</figcaption>
