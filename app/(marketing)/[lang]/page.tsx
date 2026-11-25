@@ -61,8 +61,6 @@ export default async function Home() {
         </div>
       </section>
 
-      <PanelBanner />
-
       {/* ================= ABOUT + STATS ================= */}
       <section id="about" className="home-about">
         <div className="container">
@@ -87,6 +85,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <PanelBanner />
 
       <StrategicLocation />
 

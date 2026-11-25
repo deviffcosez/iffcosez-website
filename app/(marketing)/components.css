@@ -385,7 +385,7 @@
    ========================================================================== */
 .hero {
   position: relative;
-  min-height: 500px;
+  min-height: 450px;
   display: grid;
   align-items: center;
   padding-block: 0;
@@ -402,10 +402,10 @@
   gap: 35px;
   align-items: center;
 }
-.hero__content { max-width: 600px; padding: 65px 0; }
+.hero__content { max-width: 600px; padding: 22px 0; }
 .hero__content h1 { color: var(--color-white); }
-.hero__content h1 { font-size: var(--fs-48); line-height: 1.1; margin: 16px 0 18px; letter-spacing: -1px; }
-.hero__content .hero__text { max-width: 570px; margin-bottom: 1.5rem; color: color-mix(in srgb, var(--color-white) 92%, transparent); font-size: var(--fs-16); line-height: 1.7; }
+.hero__content h1 { font-size: var(--fs-48); line-height: 1.1; margin: 10px 0 12px; letter-spacing: -1px; }
+.hero__content .hero__text { max-width: 570px; margin-bottom: 1.1rem; color: color-mix(in srgb, var(--color-white) 92%, transparent); font-size: var(--fs-16); line-height: 1.6; }
 .hero__content .hero__eyebrow { padding: 0; margin: 0; background: none; border: 0; border-radius: 0; font-size: var(--fs-11); letter-spacing: 1px; color: var(--color-white); }
 .hero__content .hero__eyebrow .dot { width: 32px; height: 2px; border-radius: 0; background: var(--color-secondary-400); box-shadow: none; animation: none; }
 .hero__content .hero__actions { gap: 0; }
@@ -962,7 +962,7 @@
   display: grid;
   grid-template-columns: 1.2fr 1.8fr;
   gap: 50px;
-  align-items: center;
+  align-items: start;
 }
 .about-page-about .home-about__grid {
   grid-template-columns: 1fr;
