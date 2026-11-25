@@ -82,20 +82,17 @@ export default function AboutUs() {
               title="Vision"
               icon={<svg viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" /><circle cx="12" cy="12" r="3" /></svg>}
             >
-              To develop a world-class industrial ecosystem that accelerates industrialisation,
-              sustainable economic growth and employment generation, while contributing directly
-              to the prosperity of farmers and local communities.
+              To setup industrial infrastructure to foster industry, economic growth, sustainable
+              economic development and create employment opportunities.
             </FeatureCard>
             <FeatureCard
               title="Mission"
               icon={<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.4" /></svg>}
             >
-              <span className="about-mission-item"><strong>World-class infrastructure:</strong> Develop an integrated industrial park supported by modern utilities and reliable infrastructure.</span>
-              <span className="about-mission-item"><strong>Global and domestic investment:</strong> Attract leading investors across diverse industrial sectors.</span>
-              <span className="about-mission-item"><strong>Sectoral focus:</strong> Promote agro-based industries, food processing, logistics and diversified manufacturing.</span>
-              <span className="about-mission-item"><strong>Socio-economic impact:</strong> Generate sustainable employment and catalyse regional economic growth.</span>
-              <span className="about-mission-item"><strong>Ease of doing business:</strong> Provide a transparent, investor-friendly environment with streamlined approvals and professional facility management.</span>
-              <span className="about-mission-item"><strong>Cooperative ethos:</strong> Uphold IFFCO’s cooperative values through an inclusive, farmer-centric approach to industrial development.</span>
+              To develop state of the art Industrial Park through a unique “Farmer Owned – Farmer
+              Managed – Farmer Focused” industrial park with world class infrastructure for setting
+              up multiproduct units and attract domestic and global manufacturing entrepreneurs
+              with a focus on agro-based industries.
             </FeatureCard>
           </div>
         </div>
