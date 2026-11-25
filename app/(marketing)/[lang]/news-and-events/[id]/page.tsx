@@ -47,7 +47,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const description = item.body.find((block) => block.type === "paragraph")?.text;
   const lang = await getLocale();
   const path = `/news-and-events/${newsEventSlug(item.title)}/`;
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://iksezwebsite.vercel.app";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://iffcosez-website.vercel.app";
   const imageUrl = new URL(item.gallery[0]?.url ?? "/images/media-banner.webp", siteUrl).toString();
 
   return {
