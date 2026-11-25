@@ -143,6 +143,7 @@ export function LeadForm({ lead }: { lead?: LeadFormLead }) {
       <div className="px-4 sm:px-6 py-6">
         <form id={FORM_ID} onSubmit={submitWithoutReset(formAction)} className="space-y-4">
           {lead && <input type="hidden" name="id" defaultValue={lead.id} />}
+          {lead && <input type="hidden" name="data" value={JSON.stringify(lead.data ?? {})} readOnly />}
 
           {state.error && (
             <p className="text-xs font-semibold text-red-500 bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">

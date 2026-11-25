@@ -19,6 +19,12 @@ export async function saveLead(
 
   const address = buildAddress(formData);
 
+  // fn_save_website_lead overwrites `data` with its default ({}) when p_data is
+  // omitted, which would erase what a website form stored (e.g. an investor's
+  // land/water/electricity requirements). The form round-trips the existing
+  // value so an edit keeps it.
+  const leadData = parseData(formData.get('data'));
+
   const { data, error } = await callRpc(supabase, 'fn_save_website_lead', {
     p_id: idRaw ? Number(idRaw) : null,
     p_first_name: formData.get('first_name'),
@@ -38,6 +44,7 @@ export async function saveLead(
     p_description: formData.get('description') || null,
     p_tags: splitCsv(formData.get('tags') as string),
     p_converted_at: convertedAtRaw ? new Date(convertedAtRaw).toISOString() : null,
+    ...(leadData ? { p_data: leadData } : {}),
   });
 
   if (error) {
@@ -63,6 +70,18 @@ export async function deleteLead(id: number): Promise<{ error: string | null }> 
 
   revalidatePath('/admin/leads');
   redirect('/admin/leads/');
+}
+
+function parseData(raw: FormDataEntryValue | null): Record<string, unknown> | null {
+  if (typeof raw !== 'string' || !raw) return null;
+  try {
+    const parsed: unknown = JSON.parse(raw);
+    return typeof parsed === 'object' && parsed !== null && !Array.isArray(parsed)
+      ? (parsed as Record<string, unknown>)
+      : null;
+  } catch {
+    return null;
+  }
 }
 
 function splitCsv(value: string | null | undefined): string[] {
