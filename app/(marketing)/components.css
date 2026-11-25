@@ -1933,3 +1933,13 @@
 .strategic-location__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--sp-3); margin-top: var(--sp-5); }
 
 .infrastructure-facts-head h2 { max-width: none; }
+
+/* ---- Desktop nav: equal space between items; close dropdowns after a click ---- */
+@media (min-width: 1321px) {
+  /* Stay inside the standard container; the items use all of its free width,
+     with equal gaps from the logo to the last item. */
+  /* The empty .nav__actions still adds one flex gap; pull the menu over it so the last item ends at the container edge. */
+  .nav__menu { justify-content: space-between; margin-left: var(--sp-4); margin-right: calc(-1 * var(--sp-5)); }
+  .nav__menu > .nav__item > .nav__link { padding-inline: .2rem; }
+}
+.nav__menu.is-closed .nav__submenu { opacity: 0; visibility: hidden; pointer-events: none; }

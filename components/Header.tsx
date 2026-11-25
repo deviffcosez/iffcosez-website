@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { localizePath, type Locale } from "@/lib/i18n/config";
 import type { Dictionary } from "@/lib/i18n/getDictionary";
@@ -64,6 +64,11 @@ export default function Header({ lang, common, labels, nav, switcherLabel }: Hea
   const [isStuck, setIsStuck] = useState(false);
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [expandedSub, setExpandedSub] = useState<string | null>(null);
+  // After a click on a menu link the clicked link keeps focus and the pointer
+  // is still over it, so the desktop dropdown would stay open on the new page.
+  // Hide the dropdowns until the pointer enters a menu item again.
+  const [menuClosed, setMenuClosed] = useState(false);
+  const isFirstRoute = useRef(true);
 
   useEffect(() => {
     const onScroll = () => setIsStuck(window.scrollY > 8);
@@ -80,6 +85,15 @@ export default function Header({ lang, common, labels, nav, switcherLabel }: Hea
     setExpandedItem(null);
     setExpandedSub(null);
     window.scrollTo(0, 0);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (isFirstRoute.current) {
+      isFirstRoute.current = false;
+      return;
+    }
+    setMenuClosed(true);
+    (document.activeElement as HTMLElement | null)?.blur();
   }, [pathname]);
 
   useEffect(() => {
@@ -129,11 +143,15 @@ export default function Header({ lang, common, labels, nav, switcherLabel }: Hea
               <img src="/images/logo.png" alt={common.logoAlt} width={145} height={46} />
             </Link>
 
-            <ul className={`nav__menu${isOpen ? " is-open" : ""}`} id="primary-menu">
+            <ul
+              className={`nav__menu${isOpen ? " is-open" : ""}${menuClosed ? " is-closed" : ""}`}
+              id="primary-menu"
+            >
               {nav.map((item) => (
                 <li
                   className={`nav__item${expandedItem === item.key ? " is-expanded" : ""}`}
                   key={item.key}
+                  onMouseEnter={() => setMenuClosed(false)}
                 >
                   <NavAnchor
                     item={item}
