@@ -121,7 +121,7 @@ export const leadershipPageProfiles: LeadershipPageProfile[] = [
     bio: "Mr. Ramesh Kumar is a Director on the Board of IFFCO Kisan SEZ Limited. He brings with him over 43 years of rich and diverse experience in the field of Human Resource Management and Industrial Relations, with a proven track record in building and strengthening people-centric institutions. Over the course of his career, Mr. Kumar has played a pivotal role in the design and implementation of robust HR systems, including strategic manpower planning and sourcing, performance management systems (PMS), learning & development (L&D) frameworks, and legal & industrial relations mechanisms. His leadership has contributed significantly to organizational effectiveness, workforce capability building, and harmonious industrial relations. Mr. Kumar has been recognized with several awards for his outstanding contributions to the HR function, reflecting his commitment to excellence, ethical governance and employee development. He holds a Post Graduate degree in Personnel Management and Industrial Relations from Xavier Institute of Social Service (XISS), Ranchi.",
   },
   {
-    name: "Smt. D. Lakshmi Parthasarathy Bhaskar",
+    name: "Smt. D. Lakshmi Parthasarathy",
     group: "board",
     role: "Retired I.A.S.",
   },

@@ -15,10 +15,6 @@ export default function MapEmbed({ className }: { className?: string }) {
   useEffect(() => {
     const box = boxRef.current;
     if (!box) return;
-    if (!("IntersectionObserver" in window)) {
-      setShow(true);
-      return;
-    }
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries.some((entry) => entry.isIntersecting)) {
