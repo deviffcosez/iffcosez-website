@@ -8,10 +8,10 @@ type EnquiryType = "investor" | "others";
 // Extra details asked of investors. The keys are stored under the lead's
 // `data` and shown in Admin > Leads, so keep them stable.
 const INVESTOR_FIELDS = [
-  { name: "project_undertaken_by", label: "Project Undertaken by", placeholder: "Company / promoter name" },
-  { name: "land_requirement", label: "Land Requirement", placeholder: "e.g. 25 acres" },
-  { name: "water_requirement", label: "Water Requirement", placeholder: "e.g. 500 KLD" },
-  { name: "electricity_requirement", label: "Electricity Requirement", placeholder: "e.g. 5 MW" },
+  { name: "project_undertaken_by", label: "Project undertaken by", placeholder: "Company name" },
+  { name: "land_requirement", label: "Land", placeholder: "e.g. 25 acres" },
+  { name: "water_requirement", label: "Water", placeholder: "e.g. 500 KLD" },
+  { name: "electricity_requirement", label: "Electricity", placeholder: "e.g. 5 MW" },
 ] as const;
 
 export default function ContactForm() {
@@ -71,24 +71,29 @@ export default function ContactForm() {
 
   return (
     <form className="form-grid" id="contact-form" noValidate onSubmit={handleSubmit}>
-      <div className="choice-group" role="radiogroup" aria-labelledby="cf-type-label">
-        <span className="choice-group__label" id="cf-type-label">
-          I am an <span className="required" aria-hidden="true">*</span>
-        </span>
-        {(["investor", "others"] as const).map((type) => (
-          <label className="choice" key={type}>
-            <input
-              type="radio"
-              name="enquiry_type"
-              value={type}
-              checked={enquiryType === type}
-              onChange={() => setEnquiryType(type)}
-            />
-            <span>{type === "investor" ? "Investor" : "Others"}</span>
-          </label>
-        ))}
+      <div className="form-head">
+        <h2 className="contact-card__title">Send us a message</h2>
+        <div className="choice-group" role="radiogroup" aria-labelledby="cf-type-label">
+          <span className="choice-group__label" id="cf-type-label">
+            I am an <span className="required" aria-hidden="true">*</span>
+          </span>
+          <div className="segmented">
+            {(["investor", "others"] as const).map((type) => (
+              <label className="segmented__option" key={type}>
+                <input
+                  type="radio"
+                  name="enquiry_type"
+                  value={type}
+                  checked={enquiryType === type}
+                  onChange={() => setEnquiryType(type)}
+                />
+                <span>{type === "investor" ? "Investor" : "Others"}</span>
+              </label>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="form-row">
+      <div className="form-row form-row--3">
         <div className="field">
           <label htmlFor="cf-name">
             Name <span className="required" aria-hidden="true">*</span>
@@ -101,25 +106,28 @@ export default function ContactForm() {
           </label>
           <input type="email" id="cf-email" name="email" autoComplete="email" placeholder="you@company.com" required />
         </div>
+        <div className="field">
+          <label htmlFor="cf-subject">
+            Subject <span className="required" aria-hidden="true">*</span>
+          </label>
+          <input type="text" id="cf-subject" name="subject" placeholder="How can we help?" required />
+        </div>
       </div>
       {enquiryType === "investor" && (
-        <div className="form-row">
-          {INVESTOR_FIELDS.map((field) => (
-            <div className="field" key={field.name}>
-              <label htmlFor={`cf-${field.name}`}>
-                {field.label} <span className="required" aria-hidden="true">*</span>
-              </label>
-              <input type="text" id={`cf-${field.name}`} name={field.name} placeholder={field.placeholder} required />
-            </div>
-          ))}
-        </div>
+        <fieldset className="form-group">
+          <legend>Project requirements</legend>
+          <div className="form-row form-row--4">
+            {INVESTOR_FIELDS.map((field) => (
+              <div className="field" key={field.name}>
+                <label htmlFor={`cf-${field.name}`}>
+                  {field.label} <span className="required" aria-hidden="true">*</span>
+                </label>
+                <input type="text" id={`cf-${field.name}`} name={field.name} placeholder={field.placeholder} required />
+              </div>
+            ))}
+          </div>
+        </fieldset>
       )}
-      <div className="field">
-        <label htmlFor="cf-subject">
-          Subject <span className="required" aria-hidden="true">*</span>
-        </label>
-        <input type="text" id="cf-subject" name="subject" placeholder="How can we help?" required />
-      </div>
       <div className="field">
         <label htmlFor="cf-message">
           Message <span className="required" aria-hidden="true">*</span>
