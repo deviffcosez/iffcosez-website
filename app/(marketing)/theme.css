@@ -104,7 +104,7 @@
      Text colours: headings var(--color-heading), body var(--color-text),
      meta/captions var(--color-muted), links var(--color-link). */
   --text-h1: 1.8125rem;   /* 29px  page title (one per page) */
-  --text-h2: 1.5rem;      /* 24px  section heading */
+  --text-h2: 1.8125rem;   /* 29px  section heading (same as page title) */
   --text-h3: 1.25rem;     /* 20px  card / sub-section title */
   --text-h4: 1.0625rem;   /* 17px  small heading, compact card title */
   --text-lead: 1.125rem;  /* 18px  intro paragraph under a section heading */
