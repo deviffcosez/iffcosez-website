@@ -1768,7 +1768,7 @@
 .panel-banner__dots { display: flex; align-items: center; gap: 14px; margin-left: 10px; flex-wrap: wrap; }
 .panel-banner__dots button { position: relative; width: 10px; height: 10px; padding: 0; border-color: var(--color-neutral-400); background: transparent; }
 /* The dot stays small; the tap area around it is 24px (WCAG target size). */
-.panel-banner__dots button::after { content: ""; position: absolute; inset: -7px; }
+.panel-banner__dots button::after { content: ""; position: absolute; top: 50%; left: 50%; width: 24px; height: 24px; transform: translate(-50%, -50%); }
 .panel-banner__dots button.is-active { width: 26px; border-radius: 999px; background: var(--color-secondary); border-color: var(--color-secondary); }
 .panel-banner__count { margin-left: auto; font-size: var(--fs-13); font-weight: 700; letter-spacing: .06em; color: var(--color-muted); }
 .panel-banner__progress { position: absolute; right: 0; bottom: 0; left: 0; height: 4px; background: var(--color-neutral-200); }
@@ -1782,6 +1782,7 @@
   .panel-banner__slide { grid-template-columns: 1fr; grid-template-areas: "copy" "points" "footer"; }
   .panel-banner__number { display: none; }
   .panel-banner__points, .panel-banner__points--6 { grid-template-columns: 1fr 1fr; }
+  .panel-banner__dots { gap: 16px; }
   .panel-banner__dots button { width: 8px; height: 8px; }
   .panel-banner__dots button.is-active { width: 20px; }
 }
