@@ -39,6 +39,8 @@
      Keep --color-secondary for icons, borders and rules. */
   --color-green-solid: var(--color-secondary-700);
   --color-green-text: var(--color-secondary-700);
+  --color-accent-text: var(--color-green-text);
+  --color-accent-text-soft: var(--color-green-text);
 
   --color-white: oklch(100% 0 0);
 
@@ -82,11 +84,11 @@
   --color-gold: var(--color-accent);
   /* Colour per slide of the home panel slideshow: all brand green, the same as the
      Business Opportunities button (flat, no gradients). Set each to vary per slide. */
-  --slide-tone-0: var(--color-secondary);
-  --slide-tone-1: var(--color-secondary);
-  --slide-tone-2: var(--color-secondary);
-  --slide-tone-3: var(--color-secondary);
-  --slide-tone-4: var(--color-secondary);
+  --slide-tone-0: var(--color-green-solid);
+  --slide-tone-1: var(--color-green-solid);
+  --slide-tone-2: var(--color-green-solid);
+  --slide-tone-3: var(--color-green-solid);
+  --slide-tone-4: var(--color-green-solid);
   --color-link-strong: var(--color-primary-700);
   --color-shadow-brand: oklch(34.25% 0.1419 274 / .15);
 

@@ -77,7 +77,7 @@ export default function PanelBannerSlider({ ids }: { ids: string[] }) {
               {...(active ? {} : { inert: true })}
             >
               <div className="panel-banner__copy">
-                <span className="panel-banner__number">{String(i + 1).padStart(2, "0")}</span>
+                <span className="panel-banner__number" aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>
                 <h3>{slide.headline}</h3>
                 {slide.subline && <p className="panel-banner__subline">{slide.subline}</p>}
                 {slide.cta && (

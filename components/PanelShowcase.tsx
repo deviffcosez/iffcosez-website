@@ -24,7 +24,7 @@ export default function PanelShowcase({ only }: PanelShowcaseProps) {
         >
           <div className="container panel-showcase__inner">
             <div className="panel-showcase__copy" data-reveal="">
-              <span className="panel-showcase__number">{String(index + 1).padStart(2, "0")}</span>
+              <span className="panel-showcase__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
               <h2>{panel.headline}</h2>
               {panel.subline && <p className="panel-showcase__subline">{panel.subline}</p>}
               <p className="panel-showcase__tagline">{panel.footer}</p>

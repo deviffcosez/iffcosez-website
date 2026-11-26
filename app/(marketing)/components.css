@@ -1977,7 +1977,7 @@
 .panel-banner__controls button:hover, .panel-banner__controls button:focus-visible { background: color-mix(in srgb, var(--color-white) 28%, transparent); }
 .panel-banner__dots button { border-color: color-mix(in srgb, var(--color-white) 65%, transparent); background: transparent; }
 .panel-banner__dots button.is-active { background: var(--color-gold); border-color: var(--color-gold); }
-.panel-banner__count { color: color-mix(in srgb, var(--color-white) 88%, transparent); }
+.panel-banner__count { color: var(--color-white); }
 .panel-banner__progress { background: color-mix(in srgb, var(--color-white) 18%, transparent); }
 .panel-banner__progress span { background: var(--color-gold); }
 
