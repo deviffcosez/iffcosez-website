@@ -13,7 +13,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-sans);
-  font-size: var(--fs-md);
+  font-size: var(--text-body);
   line-height: var(--lh-base);
   color: var(--color-text);
   background: var(--color-bg);
@@ -23,6 +23,9 @@ body {
 }
 
 body.is-locked { overflow: hidden; }
+
+/* Form controls default to the OS font (often Arial); keep them on the site font. */
+button, input, select, textarea { font-family: inherit; }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0 0 var(--sp-4);
@@ -41,11 +44,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 :lang(te) :is(h1, h2, h3, h4, h5, h6) { letter-spacing: 0; }
 
-h1 { font-size: var(--fs-4xl); }
-h2 { font-size: var(--fs-29); }
-h3 { font-size: var(--fs-2xl); }
-h4 { font-size: var(--fs-xl); }
-h5 { font-size: var(--fs-lg); }
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+h5, h6 { font-size: var(--text-body); }
 
 p { margin: 0 0 var(--sp-4); }
 p:last-child { margin-bottom: 0; }
@@ -117,7 +120,7 @@ hr {
 .truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .mx-auto { margin-inline: auto; }
 .muted { color: var(--color-muted); }
-.lead { font-size: var(--fs-lg); line-height: 1.7; color: var(--color-neutral-600); }
+.lead { font-size: var(--text-lead); line-height: 1.7; color: var(--color-text); }
 .mb-0 { margin-bottom: 0; }
 .mt-6 { margin-top: var(--sp-6); }
 .mt-8 { margin-top: var(--sp-8); }

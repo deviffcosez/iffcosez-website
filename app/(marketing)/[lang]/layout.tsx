@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Inter, Noto_Sans_Telugu, Plus_Jakarta_Sans } from "next/font/google";
-import localFont from "next/font/local";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SiteEffects from "@/components/SiteEffects";
@@ -68,17 +67,6 @@ const notoSansTelugu = Noto_Sans_Telugu({
   variable: "--font-telugu",
 });
 
-// Only the Board of Directors leadership banners use this (matching IFFCO's
-// leadership page), so it isn't preloaded on every other page. Latin
-// variable-weight file (400–700) from Google Fonts, committed in app/fonts.
-const montserrat = localFont({
-  src: "../../fonts/montserrat-latin-var.woff2",
-  weight: "400 700",
-  display: "swap",
-  preload: false,
-  variable: "--font-montserrat",
-});
-
 // TEMPORARY: render every marketing page per request so menu/page edits show
 // immediately. Without this the coded pages are prerendered with the header
 // and footer baked in. Remove (and restore the nav cache in lib/publicNav.ts)
@@ -99,7 +87,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
     <html
       lang={localeTags[lang]}
       suppressHydrationWarning
-      className={`${inter.variable} ${plusJakartaSans.variable} ${notoSansTelugu.variable} ${montserrat.variable}`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${notoSansTelugu.variable}`}
     >
       <head>
         <ThemeScript />

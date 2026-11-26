@@ -4,4 +4,4 @@
 @import "./blog.css";
 
 /* Keep CTA copy the same size as standard page paragraphs. */
-.cta-band p { font-size: var(--fs-md); }
+.cta-band p { font-size: var(--text-body); }

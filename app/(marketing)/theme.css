@@ -98,6 +98,20 @@
   --font-sans: var(--font-inter), var(--font-telugu), "Segoe UI", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   --font-display: var(--font-jakarta), var(--font-inter), var(--font-telugu), "Segoe UI", -apple-system, sans-serif;
 
+  /* ---- Type roles: THE site-wide standard ----
+     Every heading, paragraph and list item uses one of these. Do not set a
+     raw px/rem/clamp font-size on text in a component; pick the role.
+     Text colours: headings var(--color-heading), body var(--color-text),
+     meta/captions var(--color-muted), links var(--color-link). */
+  --text-h1: 1.8125rem;   /* 29px  page title (one per page) */
+  --text-h2: 1.5rem;      /* 24px  section heading */
+  --text-h3: 1.25rem;     /* 20px  card / sub-section title */
+  --text-h4: 1.0625rem;   /* 17px  small heading, compact card title */
+  --text-lead: 1.125rem;  /* 18px  intro paragraph under a section heading */
+  --text-body: 1rem;      /* 16px  every paragraph and list item */
+  --text-small: .875rem;  /* 14px  meta, captions, teaser excerpts in listing cards */
+  --text-label: .75rem;   /* 12px  eyebrows, tags, stat labels (UI, never paragraphs) */
+
   /* ---- Fixed tokens: neutral bases, status, third-party brands, leader page ---- */
   --color-black: #000;
   --color-ink: oklch(18% 0.04 277);                      /* shadow / scrim base */
@@ -109,14 +123,9 @@
   --color-x-blue: #1d9bf0;
   --color-x-ink: #0f1419;
   --color-x-muted: #536471;
-  --color-leader-green: #1d8134;
-  --color-leader-box: #008c44;
-  --color-leader-yellow: #ffea00;
-  --color-leader-line: #f4e27a;
 
   /* ---- Fonts (single source; families are loaded in [lang]/layout.tsx) ---- */
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --font-leader: var(--font-montserrat), var(--font-sans);
 
   /* ---- Fixed type scale (px values used across components) ---- */
   --fs-10: 0.625rem;
@@ -130,8 +139,6 @@
   --fs-18: 1.125rem;
   --fs-19: 1.1875rem;
   --fs-20: 1.25rem;
-  --fs-21-875: 1.36719rem;
-  --fs-22-75: 1.42188rem;
   --fs-25: 1.5625rem;
   --fs-27: 1.6875rem;
   --fs-29: 1.8125rem;
