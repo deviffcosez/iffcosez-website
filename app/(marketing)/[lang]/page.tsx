@@ -19,7 +19,6 @@ export const revalidate = 300;
 
 const FIRST_PARTY_API_KEY = process.env.NEXT_PUBLIC_IKSEZ_PUBLISHABLE_KEY;
 
-const HERO_IMAGE = "/images/home_bg.jpg";
 
 export default async function Home() {
   const { data: customerLogos } = await getPublicMediaList({
@@ -30,10 +29,12 @@ export default async function Home() {
 
   return (
     <>
-      {/* Preloaded as the likely LCP element — React 19 hoists this into
-          <head>, so the browser fetches it before it even parses the CSS
-          that references it as a background-image. */}
-      <link rel="preload" as="image" href={HERO_IMAGE} fetchPriority="high" />
+      {/* Preloaded as the LCP element — React 19 hoists these into <head>, so
+          the browser fetches the hero before it parses the CSS that uses it as
+          a background. Same files and breakpoint as .hero in components.css;
+          a browser without AVIF skips these and the CSS picks WebP/JPG. */}
+      <link rel="preload" as="image" href="/images/home_bg-828.avif" type="image/avif" media="(max-width: 828px)" fetchPriority="high" />
+      <link rel="preload" as="image" href="/images/home_bg.avif" type="image/avif" media="(min-width: 829px)" fetchPriority="high" />
 
       {/* ================= HERO ================= */}
       <section className="hero">

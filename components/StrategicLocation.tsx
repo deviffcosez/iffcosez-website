@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MAP_EMBED_SRC, MAP_LINK } from "@/lib/siteMap";
+import { MAP_LINK } from "@/lib/siteMap";
+import MapEmbed from "@/components/MapEmbed";
 
 // Live location map (same Google Maps embed as the contact page), with a
 // directions link and a route to the contact page.
@@ -13,14 +14,7 @@ export default function StrategicLocation() {
           <p>IFFCO Kisan SEZ is in Nellore district, Andhra Pradesh, on the Chennai–Kolkata economic corridor.</p>
         </div>
         <div className="strategic-location__frame">
-          <iframe
-            className="strategic-location__iframe"
-            src={MAP_EMBED_SRC}
-            title="IFFCO Kisan SEZ location map"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            allowFullScreen
-          />
+          <MapEmbed className="strategic-location__iframe" />
         </div>
         <div className="strategic-location__actions">
           <a className="btn btn--green" href={MAP_LINK} target="_blank" rel="noopener noreferrer">

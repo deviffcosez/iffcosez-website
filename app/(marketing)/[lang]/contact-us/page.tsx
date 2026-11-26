@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import CtaBand from "@/components/CtaBand";
 import ContactForm from "@/components/ContactForm";
-import { MAP_EMBED_SRC } from "@/lib/siteMap";
+import MapEmbed from "@/components/MapEmbed";
 
 export const metadata: Metadata = {
   title: "Contact us | IFFCO Kisan SEZ",
@@ -91,12 +91,7 @@ export default function ContactUs() {
           </div>
 
           <div className="map-embed" data-reveal="">
-            <iframe
-              src={MAP_EMBED_SRC}
-              title="IFFCO Kisan SEZ location map"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+            <MapEmbed />
           </div>
         </div>
       </section>

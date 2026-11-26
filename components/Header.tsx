@@ -140,7 +140,7 @@ export default function Header({ lang, common, labels, nav, switcherLabel }: Hea
           <nav className="nav" aria-label="Primary">
             <Link className="brand" href={href("/")} aria-label={common.homeAriaLabel}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo.png" alt={common.logoAlt} width={145} height={46} />
+              <img src="/images/logo.webp" alt={common.logoAlt} width={145} height={46} fetchPriority="high" />
             </Link>
 
             <ul

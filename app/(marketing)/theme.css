@@ -34,6 +34,12 @@
 
   --color-accent: oklch(75.07% 0.1295 79.85);           /* sparing highlight accent */
 
+  /* Green for small text and for white-on-green buttons/bars: the logo green
+     (--color-secondary) is only 3.6:1 against white, below WCAG AA 4.5:1.
+     Keep --color-secondary for icons, borders and rules. */
+  --color-green-solid: var(--color-secondary-700);
+  --color-green-text: var(--color-secondary-700);
+
   --color-white: oklch(100% 0 0);
 
   /* ---- Neutral scale (inverts in dark mode — see below) ---- */
@@ -243,6 +249,7 @@
     --ring: 0 0 0 3px oklch(74% 0.110 276 / .4);
     --color-link-strong: var(--color-link);
     --color-accent-text: var(--color-secondary-400);
+  --color-green-text: var(--color-secondary-400);
     --color-accent-text-soft: var(--color-secondary-400);
     /* tints used as backgrounds: dark in dark mode so adaptive text stays readable */
     --color-primary-50: oklch(27% 0.055 275);
@@ -287,6 +294,7 @@
   --ring: 0 0 0 3px oklch(74% 0.110 276 / .4);
   --color-link-strong: var(--color-link);
   --color-accent-text: var(--color-secondary-400);
+  --color-green-text: var(--color-secondary-400);
   --color-accent-text-soft: var(--color-secondary-400);
   /* tints used as backgrounds: dark in dark mode so adaptive text stays readable */
   --color-primary-50: oklch(27% 0.055 275);
