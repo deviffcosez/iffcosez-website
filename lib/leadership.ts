@@ -124,11 +124,13 @@ export const leadershipPageProfiles: LeadershipPageProfile[] = [
     name: "Smt. D. Lakshmi Parthasarathy",
     group: "board",
     role: "Retired I.A.S.",
+    image: "/images/leadership/lakshmi-parthasarathy.jpg",
   },
   {
     name: "Mr. Balvinder Kumar",
     group: "board",
     role: "Retired I.A.S.",
+    image: "/images/leadership/balvinder-kumar.jpg",
   },
   {
     name: "Dr. T. Sudhakar",
