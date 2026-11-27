@@ -6,9 +6,9 @@ import { Loader2, Lock, Eye, EyeOff, LayoutDashboard, FolderKanban, Sprout, Shie
 import { createClient } from '@/lib/supabase/client';
 import { ThemeToggleButton } from '@/components/admin/ThemeToggleButton';
 
-function IksezLogo({ size = 40 }: { size?: number }) {
+function IksezLogo() {
   // eslint-disable-next-line @next/next/no-img-element
-  return <img src="/images/logo.png" alt="IFFCO Kisan SEZ logo" width={size} height={size * 0.38} />;
+  return <img src="/images/logo.webp" alt="" width={54} height={46} />;
 }
 
 const FEATURES = [
@@ -34,22 +34,16 @@ const FEATURES = [
   },
 ];
 
-// Same wordmark + tagline lockup as Navbar.tsx (site-wide brand identity),
-// reused here since /admin skips the marketing Navbar entirely (see
-// SiteChrome.tsx) — without this, the login page had no site branding at
-// all beyond the bare icon. Fully theme-responsive, used identically on
-// both the desktop branding panel and the mobile header.
+// Same name + subtitle lockup as the site header and admin sidebar, reused
+// here since /admin skips the marketing header entirely.
 function Wordmark() {
   return (
     <div className="flex flex-col">
-      <span className="font-extrabold text-xl leading-none tracking-tight flex items-center gap-1 text-slate-900 dark:text-white">
-        IFFCO Kisan{' '}
-        <span className="bg-gradient-to-r from-primary-500 to-secondary-500 bg-clip-text text-transparent">
-          SEZ
-        </span>
+      <span className="font-extrabold text-xl leading-none tracking-tight text-slate-900 dark:text-white">
+        IFFCO Kisan SEZ
       </span>
-      <span className="text-[10px] font-semibold tracking-wider uppercase mt-1 text-slate-500 dark:text-slate-400">
-        Admin Console
+      <span className="text-xs font-semibold mt-1.5 text-slate-500 dark:text-slate-400">
+        Wholly Owned Subsidiary of IFFCO
       </span>
     </div>
   );
@@ -94,7 +88,7 @@ export default function AdminLoginPage() {
           one look. */}
       <div className="hidden md:flex flex-col justify-center px-16 py-16 flex-1 max-w-[640px] bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-3 mb-10">
-          <IksezLogo size={40} />
+          <IksezLogo />
           <Wordmark />
         </div>
         <h1 className="text-2xl font-extrabold mb-3 text-slate-900 dark:text-white">Admin Panel</h1>
@@ -120,7 +114,7 @@ export default function AdminLoginPage() {
       <div className="flex-1 flex items-center justify-center px-4 py-16">
         <div className="w-full max-w-sm">
           <div className="md:hidden flex flex-col items-center gap-3 mb-8">
-            <IksezLogo size={40} />
+            <IksezLogo />
             <Wordmark />
           </div>
 
