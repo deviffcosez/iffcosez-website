@@ -136,7 +136,7 @@ export const leadershipPageProfiles: LeadershipPageProfile[] = [
     name: "Dr. T. Sudhakar",
     group: "management",
     role: "Chief Executive Officer – IFFCO Kisan SEZ Limited",
-    image: "/images/leadership/t-sudhakar.jpg",
+    image: "/images/leadership/t-sudhakar-2.jpg",
     bio: "Dr. T. Sudhakar brings together a unique blend of academic excellence, technological expertise, business development experience and a deep-rooted passion for agriculture and nature. Holding a Doctorate in Statistics, he possesses a strong analytical foundation and a keen interest in applying data-driven thinking and strategic insights to organisational growth and development.",
     sections: [
       {
