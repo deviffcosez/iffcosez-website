@@ -217,7 +217,15 @@
   font-family: var(--font-display); font-weight: 800; font-size: 1.05rem;
   color: var(--color-heading); letter-spacing: -.01em;
 }
-.brand__tag { font-size: .68rem; color: var(--color-muted); letter-spacing: .09em; text-transform: uppercase; padding-top: .3rem; }
+.brand__tag { font-size: .62rem; font-weight: 600; color: var(--color-muted); padding-top: .3rem; }
+.brand__name, .brand__tag { white-space: nowrap; }
+/* Small phones: shrink the header lockup so the menu button stays on screen. */
+@media (max-width: 380px) {
+  .brand { gap: .5rem; padding-right: 0; border-right: 0; }
+  .brand img { height: 36px; }
+  .brand__name { font-size: .92rem; }
+  .brand__tag { font-size: .56rem; }
+}
 
 .nav__menu {
   display: flex; flex: 1 1 auto; min-width: 0; align-items: center; justify-content: center; flex-wrap: nowrap; gap: 0;

@@ -61,7 +61,11 @@ export default function Footer({ lang, common, labels, nav }: FooterProps) {
           <div>
             <div className="footer__brand">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/images/logo.webp" alt={common.logoAlt} width={164} height={52} loading="lazy" />
+              <img src="/images/logo.webp" alt="" width={61} height={52} loading="lazy" />
+              <span className="brand__text">
+                <span className="brand__name">{common.brandName}</span>
+                <span className="brand__tag">{common.brandTag}</span>
+              </span>
             </div>
             <p className="footer__description">{labels.description}</p>
             <div className="footer__social">
